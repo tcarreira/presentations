@@ -60,7 +60,6 @@ li p {
 .remark-inline-code {
   background: #ddd;
   color: #000;
-  padding: .1em;
 }
 .remark-code-line-highlighted     {
   color: #eef;
@@ -173,6 +172,9 @@ li p {
   width: 75%;
   float: right;
   color: #444;
+}
+.impact h1 {
+  font-size: 60px;
 }
 
 .inverse {

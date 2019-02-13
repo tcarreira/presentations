@@ -1,3 +1,8 @@
-FROM nginx
+FROM ubuntu
 
-COPY static-html /usr/share/nginx/html
+COPY counter.sh /counter.sh
+RUN chmod +x /counter.sh
+
+CMD /counter.sh
+
+
