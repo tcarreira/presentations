@@ -81,6 +81,9 @@ li p {
 .remark-slide-content .small {
   font-size: 18px;
 }
+.remark-slide-content .tiny {
+  font-size: 16px;
+}
 .small .remark-code {
   font-size: 20px;
 }

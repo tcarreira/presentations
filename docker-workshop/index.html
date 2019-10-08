@@ -232,6 +232,7 @@ name: tech-comparison
 
 ## Containers (Future)
 
+- Applications run directly on the kernel
 - Better resource management
 - Faster
 - Lighter / Storage requirements
@@ -385,6 +386,10 @@ name: images
 - layers: more on that later
 - immutable: every change on a running container is not stored on the image
 
+Analogy with Object Oriented Programming:
+- Images -> Classes
+- Containers -> Objects
+
 ---
 
 name: dockerfile
@@ -459,8 +464,9 @@ name: install-docker
 - Linux
   - Brain dead easy way: `wget -qO- https://get.docker.com | sh`
   - Other way: https://docs.docker.com/install/
-
-Recommended for Linux: Manage Docker as a non-root user (https://docs.docker.com/install/linux/linux-postinstall/)
+    <br><br><br>
+    Recommended for Linux: Manage Docker as a non-root user <br>(https://docs.docker.com/install/linux/linux-postinstall/)
+    <br><br>There is also a rootless docker (experimental): https://get.docker.com/rootless
 
 ???
 
@@ -476,7 +482,7 @@ Recommended for Linux: Manage Docker as a non-root user (https://docs.docker.com
 
 ```no-highlight
 $ docker --version
-Docker version 18.09.1, build 4c52b90
+Docker version 19.03.2, build 6a30dfc
 ```
 
 ```no-highlight
@@ -579,7 +585,7 @@ docker run <image>
 
 ```dockerfile
 FROM ubuntu
-
+STOPSIGNAL sigkill
 CMD x=0; while true; do echo $(( x+=1 )); sleep 1; done
 ```
 
@@ -924,22 +930,6 @@ name: tips
 Some very useful tips for advance usage
 
 # Let's have a Break?
----
-
-template: inverse
-
-# Disclaimer
-
-Content from DockerCon Europe 2018
-
-.pic-30[
-![dockerConEurope2018](img/dockerconeu18.png)
-]
-
-???
-
-- Content comes from the presentations held in Dockercon EU 2018
-- Links available at the end
 
 ---
 
@@ -1092,6 +1082,24 @@ you don't need all src inside the container
 FROM debian
 *RUN apt-get update
 *RUN apt-get -y install openjdk-8-jdk ssh vim
+COPY target/app.jar /app.jar
+CMD ["java", "-jar", "/app.jar"]
+```
+
+???
+
+- remember when a layer is cached if line does not change?
+- apt-get update will not update forever
+- what happens when want to force a new package version? (next slide)
+
+---
+
+# Identify cachable units
+
+```dockerfile
+FROM debian
+*RUN apt-get update
+*RUN apt-get -y install openjdk-8-jdk ssh<+>=1:7.4p1-10+deb9u7</+> vim
 COPY target/app.jar /app.jar
 CMD ["java", "-jar", "/app.jar"]
 ```
@@ -2181,13 +2189,18 @@ https://www.slideshare.net/Docker/presentations
 
 template: impact
 
-.content[
+# <br>That's all folks
 
-# That's all folks
-
-.center.pic-50[
-![Frog](img/warner-bros-michigan-j-frog-logo.png)
+.left-column[
+<br><br><br><br><br>
+<img src="img/presentation-url-qr.png" height="150px">
+<br>
+.tiny[https://tcarreira.github.io/presentations/docker-workshop/]
 ]
+
+.right-column[
+
+<img src="img/warner-bros-michigan-j-frog-logo.png" height="340px">
 
 ]
 
