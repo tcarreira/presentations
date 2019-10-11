@@ -71,21 +71,21 @@ code {
 }
 .remark-code-line-highlighted {
   color: #EAE9E7;
-  background-color: #6B4C61;
+  background-color: rgba(107, 76, 97, 0.733);
 }
 
 .remark-code-line-highlighted-removed-bg {
   text-decoration: line-through;
-  background-color: #ff2916b1;
+  background-color: #ff9085;
 }
 .remark-code-line-highlighted-red {
-  background-color: #ff2916b1;
+  background-color: #ff9085;
 }
 .remark-code-line-highlighted-removed {
   text-decoration: line-through;
 }
 .remark-code-line-highlighted-added {
-  background-color: #416E14;
+  background-color: rgb(117, 168, 65);
 }
 .remark-slide-content .small {
   font-size: 18px;
