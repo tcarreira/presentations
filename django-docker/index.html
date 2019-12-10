@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A Docker Introduction</title>
+    <meta charset="utf-8">
+    <style >
+      @import url(style.css);
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+
+name: inverse
+layout: true
+class: center, middle, inverse
+
+---
+
+name: impact
+layout: true
+class: center, middle, impact, content
+
+---
+
+name: title
+layout: true
+class: title center
+
+
+---
+
+name: content
+layout: true
+
+---
+
+template: title
+name: main-title
+
+
+.content[
+# Django on Docker
+
+.align-center.v-align-bottom.no-bullets.small[
+- presentation by: Tiago Carreira
+]
+
+]
+
+---
+
+# About me
+
+.left-column[
+
+## Tiago Carreira
+
+Operations Engineer (DevOps) <br> 
+@ SAPO (Altice-PT) / BOLD by Devoteam
+<br>
+.small[
+- MSc in Electrical Engineering
+- working with Linux for 6y+
+- favourite prog languages: bash, python, go
+- favourite text editor: vscode, vim
+- music, sports, therapeutic massages, bad jokes
+- .tiny[ **keywords:** DevOps, Automation, CI/CD, Docker, Beer]
+]
+
+<br>
+<br>
+<br>
+
+]
+
+.rigth-column[
+
+.center[
+.pic-circle[
+<img src="img/tcarreira.png" width="180">
+]
+<!-- Icon made by Smartline from www.flaticon.com-->
+<img alt="Music" src="img/piano.svg" width="80" margin="20">
+&nbsp;&nbsp;&nbsp;&nbsp;
+<!-- Icon made by Freepik from www.flaticon.com-->
+<img alt="Running" src="img/runer-silhouette-running-fast.svg" width="80" margin="20">
+]
+
+.center.no-bullets.tiny[
+- **telegram:** @tcarreira
+- **github:** https://<span comment="dont create a link">github.com/tcarreira
+- **twitter:** @tiagogcarreira
+]
+
+]
+
+???
+
+Reach me on telegram
+
+---
+
+# Agenda - Live coding
+
+1. Start a Django project (from scratch)
+1. Setup Docker
+1. Testing Django
+1. Docker volumes for development
+1. Docker-compose - a simple multi-container orchestration tool
+1. Debugging a Django application
+1. Improve Dockerfile and other thing...
+1. Test it all together
+
+Follow along: https://github.com/tcarreira/django-docker
+
+<img src="img/tutorial-url-qr-pt.png" width="200px" style="position:absolute;right:10%;bottom:25%;">
+
+---
+
+# Quick recap
+
+## Django 
+
+Django is a Python-based free and open-source web framework, 
+which follows the model-template-view architectural pattern. 
+Django's primary goal is to ease the creation of complex, database-driven websites.
+<br>
+It's great for fast development of a backend
+
+???
+
+- Open source
+- Easy creation of websites
+- Easy creation of a management backoffice
+
+---
+
+# Quick recap
+
+## Docker
+
+A container management tool, great for microservices.
+<br>
+"A container is a standard unit of software that packages up code and all its dependencies 
+so the application runs quickly and reliably from one computing environment to another"
+
+- CPU Isolation: kernel namespaces
+- Filesystem isolation: libcontainerd
+- Network isolation
+  - Each container also gets its own network stack
+  - Bridge interfaces
+  - **Links** allow traffic between containers
+
+???
+
+- great for microservices.
+- generates a single unit package (docker image)
+- great isolation (works on my machine and in yours)
+
+---
+
+
+# Development best practices 
+
+What do you need to develop? (not an exaustive list)
+
+.small[
+
+| tool | what for | example |
+| --- | --- | --- |
+| a good IDE | auto-completion, debugging  | vscode |
+| good IDE plugins | framework specifics (django) | `ms-python.python`,<br>`batisteo.vscode-django` |
+| linter | you need to have a real-time feedback about what is wrong | mypy |
+| formatter | it's great for code sharing | black |
+| unit tests | you should really not test your code. Make your computer do it | pytest |
+| code-to-execution | low latency after writing your code until it gets executed | manage.py runserver |
+
+]
+
+???
+
+I'll try to show some of this today
+
+---
+
+template: inverse
+
+# Live Coding
+
+Let's get our hands into it
+
+???
+
+you can follow along on https://github.com/tcarreira/django-docker <br>
+but I recommend you do it only after the presentation, in order to better follow what I explain.
+
+---
+
+# 1. Start a Django project (from scratch)
+
+- Setup VirtualEnv and install Django
+- Create django project and initial setup
+
+test it with <br>
+`python manage.py runserver 0.0.0.0:8000` 
+
+open the browser at http://127.0.0.1:8000
+
+
+???
+we could do this with docker itself, 
+but it's easier to explain the workflow after having this initial setup
+
+---
+
+# 2. Setup Docker
+
+- Install Docker
+- Setup a first draft of a Dockerfile
+- Identify some problems in Dockerfile
+
+---
+
+# Dockerfile
+
+First draft of a Dockerfile
+
+.small[
+```dockerfile
+FROM python
+COPY django_demo/ /app/
+RUN pip install --no-cache-dir "Django>=3.0,<4"
+ENV PYTHONUNBUFFERED=1
+CMD python /app/manage.py runserver 0.0.0.0:8000
+```
+]
+
+---
+
+# Dockerfile
+
+First draft of a Dockerfile
+
+.small[
+```dockerfile
+FROM <=>python</=>
+*COPY django_demo/ /app/
+RUN pip install --no-cache-dir "Django>=3.0,<4"
+ENV PYTHONUNBUFFERED=1
+CMD python /app/manage.py runserver 0.0.0.0:8000
+```
+]
+
+---
+
+# Dockerfile
+
+Better draft of a Dockerfile
+
+.left-column.small[
+```dockerfile
+FROM <=>python</=>
+*COPY django_demo/ /app/
+RUN pip install --no-cache-dir "Django>=3.0,<4"
+ENV PYTHONUNBUFFERED=1
+CMD python /app/manage.py runserver 0.0.0.0:8000
+```
+
+```Dockerfile
+FROM python<+>:3.7-alpine</+>
+RUN pip install --no-cache-dir "Django>=3.0,<4"
+*COPY django_demo/ /app/
+ENV PYTHONUNBUFFERED=1
+CMD python /app/manage.py runserver 0.0.0.0:8000
+```
+]
+
+--
+
+.right-column[
+- COPY files before pip install
+- use docker images tags (alpine if possible)
+- beware of context (.dockerignore)
+
+.small[
+`.dockerignore`:
+```
+venv/
+__pycache__/
+db.sqlite3
+```
+]
+
+]
+
+---
+
+# Build docker image
+
+```
+docker build -t django-docker-demo .
+docker run -it --rm -p8000:8000 django-docker-demo
+```
+
+???
+
+with this, we get a single standard unit of software, with all dependencies
+
+---
+
+# 3. Testing Django
+
+- create a function to handle `127.0.0.1:8000/`
+- change urls
+
+???
+
+. 
+
+--
+
+
+- how we can change the code
+  - save changes
+  - rebuild the docker image 
+  - remove old container
+  - create new container
+- but...
+
+???
+
+thats f-cking boring
+
+---
+
+template: inverse
+
+# Enter docker volumes
+
+---
+
+# 4. Docker volumes for development
+
+---
+
+# 5. Docker-compose - a simple multi-container orchestration tool
+
+---
+
+# 6. Debugging a Django application
+
+---
+
+# 7. Improve Dockerfile and other thing...
+
+---
+
+# 8. Test it all together
+
+---
+
+# 9. Last notes
+
+---
+
+template: impact
+
+# That's all folks
+<img src="img/warner-bros-michigan-j-frog-logo.png" height="340px">
+
+---
+
+# Reach me
+
+.left-column[
+
+.center[
+
+<img src="img/presentation-url-qr.png" height="250px"><br>
+.tiny[
+<a href="https://tcarreira.github.io/presentations/django-docker">
+<!--<a href="https://tcarreira.github.io/presentations/django-docker/pt.html">-->
+https<span comment="dont create a link">://tcarreira.github.io/presentations/<br>ubucon-europe-2019/docker.html
+</a>
+]
+]
+
+
+]
+
+.rigth-column[
+<br><br><br><br><br><br><br>
+.center.no-bullets.tiny[
+- **telegram:** @tcarreira
+- **github:** https://<span comment="dont create a link">github.com/tcarreira
+- **twitter:** @tiagogcarreira
+]
+
+]
+
+???
+
+Reach me on telegram
+
+---
+
+template: main-title
+
+.content[.align-center[
+## Thank you
+]]
+
+
+
+
+    </textarea>
+    <!--
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    -->
+    <script src="remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        slideNumberFormat: '%current%',
+        ratio: '16:9',
+        highlightStyle: 'monokai',
+        highlightLines: true,
+        highlightSpans: true
+      });
+    </script>
+    <script src="jquery.min.js"></script>
+    <script>
+
+      Array.from($('.remark-code-line')).forEach(el => {
+        el.innerHTML = el.innerHTML.replace('&lt;--&gt;','<span class="remark-code-line-highlighted-removed-bg">').replace('&lt;/--&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;red&gt;','<span class="remark-code-line-highlighted-red">').replace('&lt;/red&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;-&gt;','<span class="remark-code-line-highlighted-removed">').replace('&lt;/-&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;+&gt;','<span class="remark-code-line-highlighted-added">').replace('&lt;/+&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;+&gt;','<span class="remark-code-line-highlighted-added">').replace('&lt;/+&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;=&gt;','<span class="remark-code-line-highlighted">').replace('&lt;/=&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;=&gt;','<span class="remark-code-line-highlighted">').replace('&lt;/=&gt;','</span>');
+      });
+
+      // Css hack (remove top margin if column has h2 inside)
+      $('.left-column:has(h2)').addClass('remove-top-space');
+      $('.right-column:has(h2)').addClass('remove-top-space');
+
+      /* // COMMENTED - USE TO AVOID SCARING PEOPLE
+      // replace the total number of slides by infinity. Use this for presentation only
+      Array.from($('.remark-slide-number')).forEach(el => {
+        el.innerHTML = el.innerHTML.replace(/([0-9]+)\s?\/\s?([0-9]+)/g, function (match, p1, p2) {return [p1, '&infin;'].join(' / ')});
+      });
+      */
+
+    </script>
+  </body>
+</html>
+

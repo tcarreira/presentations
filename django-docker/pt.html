@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A Docker Introduction</title>
+    <meta charset="utf-8">
+    <style >
+      @import url(style.css);
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+
+name: inverse
+layout: true
+class: center, middle, inverse
+
+---
+
+name: impact
+layout: true
+class: center, middle, impact, content
+
+---
+
+name: title
+layout: true
+class: title center
+
+---
+
+name: content
+layout: true
+
+---
+
+template: title
+name: main-title
+
+
+.content[
+# Django em Docker
+
+.align-center.v-align-bottom.no-bullets.small[
+- palestrado por: Tiago Carreira
+]
+
+]
+
+---
+
+# Sobre mim
+
+.left-column[
+
+## Tiago Carreira
+
+Engenheiro de Operações (DevOps)<br> 
+@ SAPO (Altice-PT) / BOLD by Devoteam
+<br>
+.small[
+- mestrado em Engenharia Eletrotécnica e de Computadores
+- trabalho com Linux há mais de 6 anos
+- linguagens de programação favoritas: bash, python, go
+- editor de texto favorito: vscode, vim
+- música, desporto, massagens, piadas de mau gosto
+- .tiny[ **palavras chave:** DevOps, Automação, CI/CD, Docker, Cerveja]
+]
+
+<br>
+<br>
+<br>
+
+]
+
+.rigth-column[
+
+.center[
+.pic-circle[
+<img src="img/tcarreira.png" width="180">
+]
+<!-- Icon made by Smartline from www.flaticon.com-->
+<img alt="Music" src="img/piano.svg" width="80" margin="20">
+&nbsp;&nbsp;&nbsp;&nbsp;
+<!-- Icon made by Freepik from www.flaticon.com-->
+<img alt="Running" src="img/runer-silhouette-running-fast.svg" width="80" margin="20">
+]
+
+.center.no-bullets.tiny[
+- **telegram:** @tcarreira
+- **github:** https://<span comment="dont create a link">github.com/tcarreira
+- **twitter:** @tiagogcarreira
+]
+
+]
+
+
+
+---
+
+template: impact
+
+# E é tudo
+<img src="img/warner-bros-michigan-j-frog-logo.png" height="340px">
+
+---
+
+# Encontrem-me
+
+.left-column[
+
+.center[
+
+<img src="img/presentation-url-qr.png" height="250px"><br>
+.tiny[
+<a href="https://tcarreira.github.io/presentations/django-docker">
+<!--<a href="https://tcarreira.github.io/presentations/django-docker/pt.html">-->
+https<span comment="dont create a link">://tcarreira.github.io/presentations/<br>ubucon-europe-2019/docker.html
+</a>
+]
+]
+
+
+]
+
+.rigth-column[
+<br><br><br><br><br><br><br>
+.center.no-bullets.tiny[
+- **telegram:** @tcarreira
+- **github:** https://<span comment="dont create a link">github.com/tcarreira
+- **twitter:** @tiagogcarreira
+]
+
+]
+
+---
+
+template: main-title
+
+.content[.align-center[
+## Thank you
+]]
+
+
+
+
+    </textarea>
+    <!--
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    -->
+    <script src="remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        slideNumberFormat: '%current%',
+        ratio: '16:9',
+        highlightStyle: 'monokai',
+        highlightLines: true,
+        highlightSpans: true
+      });
+    </script>
+    <script src="jquery.min.js"></script>
+    <script>
+
+      Array.from($('.remark-code-line')).forEach(el => {
+        el.innerHTML = el.innerHTML.replace('&lt;--&gt;','<span class="remark-code-line-highlighted-removed-bg">').replace('&lt;/--&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;red&gt;','<span class="remark-code-line-highlighted-red">').replace('&lt;/red&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;-&gt;','<span class="remark-code-line-highlighted-removed">').replace('&lt;/-&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;+&gt;','<span class="remark-code-line-highlighted-added">').replace('&lt;/+&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;+&gt;','<span class="remark-code-line-highlighted-added">').replace('&lt;/+&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;=&gt;','<span class="remark-code-line-highlighted">').replace('&lt;/=&gt;','</span>');
+        el.innerHTML = el.innerHTML.replace('&lt;=&gt;','<span class="remark-code-line-highlighted">').replace('&lt;/=&gt;','</span>');
+      });
+
+      // Css hack (remove top margin if column has h2 inside)
+      $('.left-column:has(h2)').addClass('remove-top-space');
+      $('.right-column:has(h2)').addClass('remove-top-space');
+
+      /* // COMMENTED - USE TO AVOID SCARING PEOPLE
+      // replace the total number of slides by infinity. Use this for presentation only
+      Array.from($('.remark-slide-number')).forEach(el => {
+        el.innerHTML = el.innerHTML.replace(/([0-9]+)\s?\/\s?([0-9]+)/g, function (match, p1, p2) {return [p1, '&infin;'].join(' / ')});
+      });
+      */
+
+    </script>
+  </body>
+</html>
+

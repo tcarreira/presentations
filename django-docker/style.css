@@ -1,0 +1,193 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
+body {
+  font-family: 'Helvetica', sans-serif;
+}
+h1, h2, h3 {
+  font-weight: normal;
+}
+code {
+  font-family: 'Roboto Mono', monospace;
+}
+.remark-slide-content {
+  font-size: 25px; 
+  background-image: url('img/bg-content.svg');
+  background-size: contain; 
+}
+.remark-slide-content h1 {
+  font-family: 'Impact', serif;
+  font-size: 45px; 
+  color: #0F4B5F;
+}
+.remark-slide-content h2 {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 35px; 
+  color: #949494;
+}
+.remark-slide-content h3 {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 25px; 
+  color: #949494;
+}
+.remark-slide-content .remark-code {
+  font-size: 25px; 
+}
+.remark-slide-number {
+  left: 15px;
+  bottom: 8px;
+  right: auto;
+}
+
+span.bg-white {
+  background-color: #fff;
+}
+
+img {
+  max-width: 95%;
+}
+li p {
+  line-height: 1.25em; 
+}
+
+.remark-code {
+  border-radius: 5px;
+  display: block;
+  padding: .5em;
+  overflow-x: auto;
+  background: #222;
+  color: #ddd;
+}
+.remark-inline-code {
+  background: #ddd;
+  color: #000;
+}
+.remark-code-line-highlighted     {
+  color: #eef;
+  background-color: #336;
+}
+.remark-code-line-highlighted-removed-bg {
+  text-decoration: line-through;
+  background-color: #962319;
+}
+.remark-code-line-highlighted-red {
+  background-color: #962319;
+}
+.remark-code-line-highlighted-removed {
+  text-decoration: line-through;
+}
+.remark-code-line-highlighted-added {
+  background-color: #416E14;
+}
+.remark-slide-content .small {
+  font-size: 20px;
+}
+.remark-slide-content .tiny {
+  font-size: 16px;
+}
+.small .remark-code {
+  font-size: 20px;
+}
+.tiny .remark-code {
+  font-size: 16px;
+}
+.remark-notes-current-area .remark-code {
+  font-size: inherit;
+}
+
+.title {
+  vertical-align: middle;
+  background-image: url('img/bg-title.svg');
+  text-align: right;
+}
+.title .content {
+  width: 70%;
+  float: right;
+  color: #444;
+}
+.title h1 {
+  font-size: 60px; 
+}
+.title h2 {
+  font-size: 50px; 
+}
+.title h3 {
+  font-size: 40px; 
+}
+
+.pic {
+  vertical-align: middle;
+  text-align: center;
+}
+.pic-circle img {
+  vertical-align: middle;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.impact {
+  background-image: url('img/bg-title.svg');
+}
+.impact .content {
+  width: 75%;
+  float: right;
+  color: #444;
+}
+.impact h1 {
+  font-size: 60px;
+}
+
+.inverse {
+  background: #333;
+  color: #eee;
+  text-shadow: 0 0 20px #222;
+}
+.inverse h1, .inverse h2 {
+  color: #eee;
+  line-height: 1.1em;
+  background-color: #333;
+}
+
+/* Two-column layout */
+.left-column {
+  width: 48%;
+  float: left;
+}
+.right-column {
+  width: 48%;
+  float: right;
+}
+.no-column {
+  clear: both;
+}
+.remove-top-space {
+  margin-block-start: -30.15px;
+}
+
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}
+
+.v-align-top {
+  vertical-align: top;
+}
+.v-align-mid {
+  display: inline-block;
+  vertical-align: middle;
+}
+.v-align-bottom {
+  vertical-align: bottom;
+}
+
+.no-bullets li {
+  list-style-type: none;
+}
