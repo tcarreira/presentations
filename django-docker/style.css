@@ -191,3 +191,17 @@ li p {
 .no-bullets li {
   list-style-type: none;
 }
+
+.formattable td {
+  padding: 5px;
+  text-align: left;
+}
+.formattable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(25, 108, 144);
+  color: white;
+  text-align: center;
+}
+.formattable tr:nth-child(even){background-color: #eeeeee;}
