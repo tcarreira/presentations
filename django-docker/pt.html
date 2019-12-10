@@ -94,14 +94,424 @@ Engenheiro de Operações (DevOps)<br>
 
 ]
 
+---
 
+# O que vou abordar (live-coding)
+
+1. Iniciar um projeto Django (do zero)
+1. Configurar Docker
+1. Testar Django (com Docker)
+1. Desenvolver com *Docker volumes*
+1. Docker-compose - uma ferramenta simples para gestão de múltiplos *containers*
+1. Depurar (debug) uma aplicação Django
+1. Melhorar um *Dockerfile* e outras coisas...
+1. Testar tudo junto
+1. Notas finais
+
+Sigam o tutorial em: https://github.com/tcarreira/django-docker
+
+<img src="img/tutorial-url-qr-pt.png" width="200px" style="position:absolute;right:10%;bottom:25%;">
+
+---
+
+# Recapitulando
+
+## Django 
+
+Django é uma framework de código aberto para desenvolvimento rápido para web, escrito em Python, 
+que utiliza o padrão model-template-view (MTV). 
+O objetivo principal de Django é criar facilmente websites baseados numa base de dados complexa.
+<br>
+É ótimo para o rápido desenvolvimento de um backoffice.
+
+???
+
+- código aberto (Open source)
+- fácil criar sites
+- fácil criar um backoffice de gestão do site
+
+---
+
+# Recapitulando
+
+## Docker
+
+Uma ferranenta para gestão de *containers*, ótimo para micro-serviços.
+<br>
+"Um *container* é uma unidade padronizada de software, que ecapsula o código e todas as suas dependências,
+para que a aplicação possa correr rápida e fiável entre diferentes ambientes. 
+
+- Isolamento a nível de CPU: kernel namespaces
+- Isolamento a nível do sistema de ficheiros: libcontainerd
+- Isolamento a nível da rede
+    - cada *container* tem a sua própria rede
+    - interefaces de rede em modo *bridge* 
+    - **Links** permitem comunicação entre *containers*
+
+???
+
+- ótimo para micro-serviços
+- uma unidade única de software (docker image)
+- ótimo isolamento (funciona na minha máquina e na tua)
+
+---
+
+
+# Boas práticas para desenvolvimento
+
+O que é necessário para desenvolver código? (uma lista não exaustiva)
+
+.small[
+
+| ferramenta | para que serve | exemplo |
+| --- | --- | --- |
+| um bom IDE | auto-completion, debugging  | vscode |
+| bons plugins no IDE | específico para a framework (django) | `ms-python.python`,<br>`batisteo.vscode-django` |
+| linter | é necessário feedback em tempo real sobre o que está errado | mypy |
+| formatador | é fantástico para partilha de código | black |
+| testes unitários | ninguém devia testar o seu código. Deixem os computadores fazê-lo | pytest |
+| código-execução | mínimo tempo desde a escrita do código até que ele é executado | manage.py runserver |
+
+]
+
+???
+
+Vou abordar algumas destas práticas hoje
+
+---
+
+template: inverse
+
+# Live Coding
+
+Vamos meter a mão na massa
+
+???
+
+podem seguir em https://github.com/tcarreira/django-docker <br>
+mas recomendo que o façam apenas após a apresentação, para poderem seguir melhor o que eu vou explicar
+
+---
+
+# 1. Iniciar um projeto Django (do zero)
+
+- Configurar um VirtualEnv e instalar Django
+- Criar um projeto Django e configurações iniciais
+
+teste inicial <br>
+`python manage.py runserver 0.0.0.0:8000` 
+
+abrir um browser: http://127.0.0.1:8000
+
+
+???
+podia fazer este início com docker, 
+mas é mais fácil explicar o fluxo de trabalho depois desta configuração inicial
+
+---
+
+# 2. Configurar Docker
+
+- Instalar o Docker
+- Criar um primeiro rascunho de um Dockerfile
+- Identificar alguns problemas no Dockerfile
+
+---
+
+# Dockerfile
+
+primeiro rascunho de um Dockerfile
+
+.small[
+```dockerfile
+FROM python
+COPY django_demo/ /app/
+RUN pip install --no-cache-dir "Django>=3.0,<4"
+ENV PYTHONUNBUFFERED=1
+CMD python /app/manage.py runserver 0.0.0.0:8000
+```
+]
+
+---
+
+# Dockerfile
+
+primeiro rascunho de um Dockerfile
+
+.small[
+```dockerfile
+FROM <=>python</=>
+*COPY django_demo/ /app/
+RUN pip install --no-cache-dir "Django>=3.0,<4"
+ENV PYTHONUNBUFFERED=1
+CMD python /app/manage.py runserver 0.0.0.0:8000
+```
+]
+
+---
+
+# Dockerfile
+
+primeiro rascunho de um Dockerfile
+
+.left-column.small[
+```dockerfile
+FROM <=>python</=>
+*COPY django_demo/ /app/
+RUN pip install --no-cache-dir "Django>=3.0,<4"
+ENV PYTHONUNBUFFERED=1
+CMD python /app/manage.py runserver 0.0.0.0:8000
+```
+
+```Dockerfile
+FROM python<+>:3.7-alpine</+>
+RUN pip install --no-cache-dir "Django>=3.0,<4"
+*COPY django_demo/ /app/
+ENV PYTHONUNBUFFERED=1
+CMD python /app/manage.py runserver 0.0.0.0:8000
+```
+]
+
+--
+
+.right-column[
+- COPY dos ficheiros antes do pip install
+- usar tags nas imagens de docker (se possível, alpine)
+- cuidado com o contexto (.dockerignore)
+
+.small[
+`.dockerignore`:
+```
+venv/
+__pycache__/
+db.sqlite3
+```
+]
+
+]
+
+???
+
+`.dockerignore`
+
+quando criamos uma imagem de docker,
+por trás ele vai transferir todos os ficheiros do contexto para o servidor docker (local),
+o que significa que devemos indicar ao docker que ficheiros não são supostos estar incluídos no contexto
+para que não sejam transferidos ficheiros desnecessários
+
+---
+
+# Criar imagens de docker
+
+```
+docker build -t django-docker-demo .
+docker run -it --rm -p8000:8000 django-docker-demo
+```
+
+???
+
+com isto, temos uma unidade padronizada de software, que ecapsula o código e todas as suas dependências
+
+---
+
+# 3. Testar Django (com Docker)
+
+- criar uma função para tratar `127.0.0.1:8000/`
+- alterar os urls
+
+
+--
+
+
+- como alterar o cógigo que está a correr
+  - guardar alterações
+  - recriar a imagem de docker
+  - remover o container anterior
+  - criar um novo container
+- mas...
+
+???
+
+isto é chato pa c*
+
+---
+
+template: inverse
+
+# docker volumes
+
+---
+
+# 4. Desenvolver com *Docker volumes*
+
+.small[
+```
+docker run -it --rm -p8000:8000 <+>-v "$(pwd)/django_demo/:/app/"</+> django-docker-demo
+``` 
+]
+  
+
+agora, cada vez que um ficheiro for alterado, o django vai ser automaticamente reiniciado. <br>
+Muito útil (essencial) para desenvolvimento.
+
+---
+
+<br><br>
+## então e se eu precisar de mais *containers*?
+
+- talvez adicionar Celery
+- ou uma base de dados diferente (mysql)
+- ou outro micro-serviço
+
+
+---
+
+template: inverse
+
+# docker-compose
+
+uma ferramenta simples para gestão de múltiplos *containers*
+
+---
+
+# 5. Docker-compose
+
+.left-column[
+adicionar mais serviços
+- Celery
+- Redis
+
+então...
+- Instalar celery + redis
+- Criar `docker-compose.yml` 
+- Atualizar o código python
+- Testar esta nova configuração
+]
+
+.right-column.tiny[
+```docker-compose
+version: "3.4"
+services:
+    django:
+        image: django-docker-demo:latest
+        ports:
+            - 8000:8000
+
+    celery-worker:
+        image: django-docker-demo:latest
+        command: "celery -A ... worker"
+        
+    redis:
+        image: redis:5.0-alpine
+```
+]
+
+---
+
+# 6. Depurar (debug) uma aplicação Django
+
+- Python: Current File (ficheiro atual - não é muito prático em Django)
+- Python: Debug Django (muito bom)*
+
+<br><br><br><br><br><br>
+
+.small[
+<div></div>* mas sem docker
+]
+
+---
+
+# 6. Depurar (debug) uma aplicação Django
+
+- Python: Current File (ficheiro atual - não é muito prático em Django)
+- Python: Debug Django (muito bom)*
+- **Python: Debug Django attach Docker** (conectar ao Docker - depuração remota)
+
+<br><br><br><br><br>
+
+.small[
+<div></div>* mas sem docker
+]
+
+???
+
+Isto é muito útil para fazer depuração quando é necessário correr vários containers
+
+---
+
+# 6. Depurar (debug) uma aplicação Django
+
+- preparar uma imagem de docker para correr o depurador
+- configurar a rede (expôr portos)
+- adicionar o depurador dentro do Django
+- configurar o IDE
+
+
+---
+
+# 7. Melhorar um *Dockerfile* e outras coisas...
+
+.left-column[
+- não correr como root
+- remover dependências desnecessárias
+- manter os registos (logs) limpos
+- cache de nível avançado (com Buildkit `DOCKER_BUILDKIT=1`)
+- qualidade como parte da linha de montagem
+]
+
+.right-column[
+- Preparar o Django para produção
+  - usar um servidor web
+  - servir conteúdo estático
+  - usar uma base de dados diferente
+  - criar um entrypoint comum
+]
+
+---
+
+# 8. Testar tudo junto
+
+.small[
+```
+git clone https://github.com/tcarreira/django-docker.git
+cd django-docker
+DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose up <=>--build</=>
+```
+]
+
+<br><br><br><br><br><br>
+.tiny[
+<div></div>* é necessário docker-compose >= 1.25 para correr o buildkit diretamente
+]
+
+???
+
+caso não esteja disponível o docker-compose >= 1.25, primeiro é necessário criar as imagens
+
+- DOCKER_BUILDKIT=1 docker build -t django-docker-demo:latest .
+- DOCKER_BUILDKIT=1 docker build -t django-docker-demo:dev --target=dev .
+- DOCKER_BUILDKIT=1 docker build -t django-docker-demo:qa --target=qa .
+- DOCKER_BUILDKIT=1 docker build -t django-docker-demo:webserver --target=webserver .
+
+Só depois `docker-compose up` 
+
+De qualquer forma, isto deveria fazer parte da linha de montagem
+
+---
+
+# 9. Notas finais
+
+- criar um `docker-compose.qa.yml` separado para testes de qualidade com as imagens finais
+- criar uma linha de montagem para integração contínua (CI/CD)
 
 ---
 
 template: impact
 
-# E é tudo
-<img src="img/warner-bros-michigan-j-frog-logo.png" height="340px">
+# É tudo
+<img src="img/warner-bros-michigan-j-frog-logo.png" height="300px">
+
+## Dúvidas?
 
 ---
 
@@ -113,10 +523,7 @@ template: impact
 
 <img src="img/presentation-url-qr.png" height="250px"><br>
 .tiny[
-<a href="https://tcarreira.github.io/presentations/django-docker">
-<!--<a href="https://tcarreira.github.io/presentations/django-docker/pt.html">-->
-https<span comment="dont create a link">://tcarreira.github.io/presentations/<br>ubucon-europe-2019/docker.html
-</a>
+https://tcarreira.github.io/presentations/django-docker/pt.html
 ]
 ]
 
@@ -133,12 +540,16 @@ https<span comment="dont create a link">://tcarreira.github.io/presentations/<br
 
 ]
 
+???
+
+Encontrem-me no telegram
+
 ---
 
 template: main-title
 
 .content[.align-center[
-## Thank you
+## Obrigado
 ]]
 
 
