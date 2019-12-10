@@ -314,9 +314,6 @@ with this, we get a single standard unit of software, with all dependencies
 - create a function to handle `127.0.0.1:8000/`
 - change urls
 
-???
-
-. 
 
 --
 
@@ -330,7 +327,7 @@ with this, we get a single standard unit of software, with all dependencies
 
 ???
 
-thats f-cking boring
+thats f*cking boring
 
 ---
 
@@ -342,32 +339,174 @@ template: inverse
 
 # 4. Docker volumes for development
 
+.small[
+```
+docker run -it --rm -p8000:8000 <+>-v "$(pwd)/django_demo/:/app/"</+> django-docker-demo
+``` 
+]
+  
+
+now, every time you change some file, django wil reload itself. <br>
+Very useful (a must) for developmemt.
+
 ---
 
-# 5. Docker-compose - a simple multi-container orchestration tool
+<br><br>
+## what if I need more containers?
+
+- maybe adding Celery
+- or a different database (mysql)
+- or another micro-service
+
+
+---
+
+template: inverse
+
+# Enter docker-compose
+
+a simple multi-container orchestration tool
+
+---
+
+# 5. Docker-compose
+
+.left-column[
+add more services
+- Celery
+- Redis
+
+so...
+- Install celery + redis
+- Create a `docker-compose.yml` 
+- Update python code
+- Test our setup
+]
+
+.right-column.tiny[
+```docker-compose
+version: "3.4"
+services:
+    django:
+        image: django-docker-demo:latest
+        ports:
+            - 8000:8000
+
+    celery-worker:
+        image: django-docker-demo:latest
+        command: "celery -A ... worker"
+        
+    redis:
+        image: redis:5.0-alpine
+```
+]
 
 ---
 
 # 6. Debugging a Django application
 
+- Python: Current File (not very handy in Django)
+- Python: Debug Django (very good)*
+
+<br><br><br><br><br><br>
+
+.small[
+<div></div>* If you are a beginner, stay with it
+]
+
+---
+
+# 6. Debugging a Django application
+
+- Python: Current File (not very handy in Django)
+- Python: Debug Django (very good)*
+- **Python: Debug Django attach Docker** (like remote debugging)
+
+<br><br><br><br><br>
+
+.small[
+<div></div>* If you are a beginner, stay with it
+]
+
+???
+
+This is very handy if you want to debug with multiple containers running.
+
+---
+
+# 6. Debugging a Django application
+
+- prepare a docker image for running a debugger
+- setup network (expose ports)
+- add a debugger inside Django
+- setup IDE
+
+
 ---
 
 # 7. Improve Dockerfile and other thing...
+
+.left-column[
+- do not run as root.
+- remove unnecessary dependencies.
+- clean your logs
+- next level caching (with Buildkit `DOCKER_BUILDKIT=1`)
+- quality as part of the pipeline
+]
+
+.right-column[
+- Prepare Django for production
+  - use a webserver
+  - serve static content
+  - use a different database
+  - build a common entrypoint
+]
 
 ---
 
 # 8. Test it all together
 
+.small[
+```
+git clone https://github.com/tcarreira/django-docker.git
+cd django-docker
+DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose up <=>--build</=>
+```
+]
+
+<br><br><br><br><br><br>
+.tiny[
+<div></div>* you need docker-compose >= 1.25 in order to use builkit directly.
+]
+
+???
+
+If you don't have docker-compose >= 1.25, build all images first
+
+- DOCKER_BUILDKIT=1 docker build -t django-docker-demo:latest .
+- DOCKER_BUILDKIT=1 docker build -t django-docker-demo:dev --target=dev .
+- DOCKER_BUILDKIT=1 docker build -t django-docker-demo:qa --target=qa .
+- DOCKER_BUILDKIT=1 docker build -t django-docker-demo:webserver --target=webserver .
+
+Then `docker-compose up` 
+
+This should be part of a Continuous Integration process anyway
+
 ---
 
 # 9. Last notes
+
+- keep separate `docker-compose.qa.yml` for testing/qa with final images
+- build your continuous integration process
 
 ---
 
 template: impact
 
 # That's all folks
-<img src="img/warner-bros-michigan-j-frog-logo.png" height="340px">
+<img src="img/warner-bros-michigan-j-frog-logo.png" height="300px">
+
+## Questions?
 
 ---
 
@@ -379,10 +518,7 @@ template: impact
 
 <img src="img/presentation-url-qr.png" height="250px"><br>
 .tiny[
-<a href="https://tcarreira.github.io/presentations/django-docker">
-<!--<a href="https://tcarreira.github.io/presentations/django-docker/pt.html">-->
-https<span comment="dont create a link">://tcarreira.github.io/presentations/<br>ubucon-europe-2019/docker.html
-</a>
+https://tcarreira.github.io/presentations/django-docker
 ]
 ]
 
