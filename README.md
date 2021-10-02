@@ -4,7 +4,7 @@
 - [Docker - Ubucon Europe 2019](https://tcarreira.github.io/presentations/ubucon-europe-2019/docker.html)
 - [Docker - Tips and Best Practices - Ubucon Europe 2019](https://tcarreira.github.io/presentations/ubucon-europe-2019/docker2.html)
 - [Django on Docker](https://tcarreira.github.io/presentations/django-docker/) ([PT](https://tcarreira.github.io/presentations/django-docker/pt/))
-
+- [Como manter um podcast a custo zero com software livre](https://tcarreira.github.io/presentations/marmita-de-redon)
 
 
 ----
