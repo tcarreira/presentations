@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,300&display=swap');
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #c3e5f7;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+h2, h3 {
+  font-weight: normal;
+}
+
+.remark-slide-content {
+  font-size: 20px;
+  background-image: url('img/template/bg-slides.png');
+  background-size: contain;
+}
+
+.remark-slide-content h1 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 45px;
+  color: #5cc6ff;
+}
+
+.remark-slide-content h2 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 35px;
+  color: #53c3ff;
+}
+
+.remark-slide-content h3 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 23px;
+  color: #2db4fd;
+}
+
+.remark-slide-number {
+  left: 10px;
+  bottom: 6px;
+  right: auto;
+  color: #002f46;
+  opacity: 1.8;
+}
+
+.title .remark-slide-number {
+  display: none;
+}
+
+img {
+  max-width: 95%;
+}
+
+p li {
+  line-height: 1.5;
+}
+
+.remark-notes li {
+  line-height: 1.1;
+}
+
+.remark-notes-preview code, .remark-notes code {
+  font-size: inherit;
+}
+
+code {
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.remark-code, .hljs-default .hljs {
+  font-size: 20px;
+  border-radius: 5px;
+  display: block;
+  padding: .5em;
+  overflow-x: auto;
+  background: #144055 !important;
+  /* color: #111111; */
+}
+
+.remark-inline-code {
+  background: #144055;
+  /* color: #111111; */
+}
+
+.remark-code-line-highlighted {
+  /* color: #EAE9E7; */
+  background-color: #0078af;
+}
+
+.remark-code-line-highlighted-removed-bg {
+  text-decoration: line-through;
+  background-color: #EC6D6E;
+}
+
+.remark-code-line-highlighted-red {
+  background-color: #EC6D6E;
+}
+
+.remark-code-line-highlighted-removed {
+  text-decoration: line-through;
+}
+
+.remark-code-line-highlighted-added {
+  background-color: rgb(117, 168, 65);
+}
+
+.remark-slide-content .small {
+  font-size: 17px;
+}
+
+.remark-slide-content .tiny {
+  font-size: 15px;
+}
+
+.small {
+  font-size: 17px;
+}
+
+.tiny {
+  font-size: 15px;
+}
+
+.small .remark-code {
+  font-size: 17px;
+  line-height: 1.2em;
+}
+
+.tiny .remark-code {
+  font-size: 14px;
+  line-height: 1.1em;
+}
+
+.remark-notes-current-area .remark-code {
+  font-size: inherit;
+  line-height: 1.3em;
+}
+
+.title {
+  vertical-align: middle;
+  background-image: url('img/template/bg-title.png');
+  background-size: contain;
+  text-align: right;
+}
+
+/* .title .content {
+  width: 70%;
+  float: right;
+} */
+
+.title h1 {
+  font-size: 60px;
+}
+
+.title h2 {
+  font-size: 50px;
+}
+
+.title h3 {
+  font-size: 40px;
+}
+
+.pic img {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.pic-circle img {
+  vertical-align: middle;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.impact {
+  background-image: url('img/template/bg-impact.png');
+  background-size: contain;
+}
+
+.impact .content {
+  width: 75%;
+  margin: auto;
+  color: #2db4fd;
+}
+
+.impact h1 {
+  font-size: 60px;
+}
+
+.inverse {
+  background: #1672a3;
+  color: #00263a;
+  text-shadow: 0 0 20px #025a8a;
+  font-weight: 800;
+}
+
+.inverse h1, .inverse h2 {
+  color: #003653;
+  line-height: 1.1m;
+  /* background-color: #2C001E; */
+}
+
+/* Two-column layout */
+
+.left-column {
+  width: 48%;
+  float: left;
+}
+
+.right-column {
+  width: 48%;
+  float: right;
+}
+
+.no-column {
+  clear: both;
+}
+
+.remove-top-space {
+  margin-block-start: -30.15px;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.v-align-top {
+  vertical-align: top;
+}
+
+.v-align-mid {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.v-align-bottom {
+  vertical-align: bottom;
+}
+
+a:link, a:visited {
+  color: #c3e5f7;
+  text-decoration: none;
+  text-shadow: 0 0 5px #e3e5f7;
+}
+
+/* change bullets color -> */
+
+ul {
+  list-style: none;
+}
+
+h1 :not(li) {
+  color: red !important;
+}
+
+ul li::before {
+  content: "\2022";
+  color: #c3e5f7;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+/* <- change bullets color */
+
+.not {
+  text-decoration: line-through;
+}
