@@ -26,5 +26,8 @@ if [ -f "$pdffile" ]; then
   esac
 fi
 
-docker run --rm -t -u "$(id -u):$(id -g)" -v "$(pwd):/host" astefanutti/decktape "/host/$htmlfile" "/host/$pdffile"
+DOCKER_MAGE="tcarreira/decktape"
+[ "$(uname -m)" = "arm64" ] && DOCKER_IMAGE="${DOCKER_MAGE}:m1"
+
+docker run --rm -t -u "$(id -u):$(id -g)" -v "$(pwd):/host" "${DOCKER_IMAGE}" "/host/$htmlfile" "/host/$pdffile"
 
