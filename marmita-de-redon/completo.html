@@ -72,7 +72,6 @@ ou "como criar e manter um podcast a custo zero com Software Livre"
 
 .rigth-column[
 .center.pic-circle[
-<!-- TODO: fix pic -->
 <img src="img/tcarreira.jpg" width="180">
 ]
 
@@ -93,35 +92,315 @@ name: agenda
 
 # Agenda
 
-- .not[Criação do podcast]
-- .not[Gravação e captura]
-- .not[Edição sonora]
+- O que é um podcast
+- Gravação e captura
+- Edição sonora
 - Website
 - Publicação
 - Automatização
 
 ---
 
-template: impact
-name: revisao
+# Opções, demasiadas opções...
 
-# O que é um podcast
-Revisão
+
+.center.comparison.small[
+
+|                   | Contratar <br>serviço profissional | Plataforma para<br>podcasters  |        Alojamento multimedia <br>(eg: soundcloud)        |                   Self-Hosted                   |                            Marmita de Redon                               |
+|-------------------|:------------------------------:|:----------------------------------:|:--------------------------------------------------------:|:-----------------------------------------------:|:-------------------------------------------------------------------------:|
+| Material Gravação |               ✓✓               |                 ?                  |                            ?                             |                        ?                        |                                     ?                                     |
+| Marca/Tema        |               ✓✓               |               ✓&#33;               |                            ✓                             |                        ✓                        |                                     ✓                                     |
+| Edição áudio      |               ✓✓               |               ✓&#33;               |                            ✓                             |                        ✓                        |                                     ✓                                     |
+| Website           |               ✓✓               |               ✓&#33;               |                          ✓&#33;                          |                        ✓                        |                                     ✓                                     |
+| Alojamento        |               ✓✓               |                 ✓✓                 |                            ✓!                            |                        ✓                        |                                     ✓                                     |
+| Analytics         |               ✓✓               |                 ✓✓                 |                            ✓✓                            |                       ✓✓                        |                                     ✓                                     |
+| Monetização       |               ✓✓               |               ✓/✓✓                 |                            ✓                             |                        ✓                        |                                     ?                                     |
+| Controlo total    |               ✓✓               |                 ✗                  |                            ✗                             |                        ✓                        |                                     ✓                                     |
+|                   |                                |                                    |                                                          |                                                 |                                                                           |
+| Custos            |             $$$$$              |                0-$$                |                           0-$                            |                       $$                        |                                     0                                     |
+| Tempo Investido   |               🕒               |                 🕒                  |                            🕒                            |                      🕒🕒                        |                                  🕒🕒🕒                                   |
+| Manutenção ($/t)  |           $$$$ / 🕒            |             0-$$ / 🕒               |                         $$ / 🕒                          |                    $$ / 🕒                      |                                  0 / 🕒                                   |
+
+]
+
+???
+
+
+✓✓ - Feito pelo serviço  
+✓&#33; - Incluído no serviço, mas não é ideal  
+✓ - Disponível (feito manualmente)  
+✗ - Indisponível  
+\* os custos não incluem o material de gravação, por ser comum a todos os serviços.
+
+[1] Paid Podcasters Platforms: Acast, Blubrry, Buzzprout, Captivate, Castos, Descript, Podbean, Simplecast, Speaker, Transistor, etc...  
+[2] Free Podcasters Platforms: <b>Anchor</b>, Breaker, Castbox, etc...
+
+
 
 ---
 
+template: impact
+name: whatis
+
 # O que é um podcast
 
-- Ouvinte usa um Podcatcher (Spotify, iTunes, AntennaPod, cPod, gPodder, VLC, etc...)
-- Podcatcher lê **Feed RSS** do podcast
-  - metadados sobre o podcast e todos os episódios
-- Podcatcher faz **download do áudio** através do link disponibilizado no Feed RSS
-- Ouvinte ouve o episódio :)
+---
+
+# Do podcast ao ouvinte
+
+.left-column[
+1. Ouvinte usa um Podcatcher (Spotify, iTunes, AntennaPod, cPod, gPodder, VLC, etc...)
+1. Podcatcher lê **Feed RSS** do podcast
+  1. Podcatcher extrai metadados sobre o podcast e todos os episódios
+  1. Podcatcher faz **download do áudio** através do link disponibilizado no Feed RSS
+1. Ouvinte ouve o episódio :)
+]
+
+--
+
+.right-column[
+.tiny[
+```
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" ...>
+  <title>Marmita de Redon</title>
+  <link>https://marmita.pt/</link>
+  <description>Um podcast sobre os anos 90 e 2000</description>
+  <language>pt-pt</language>
+  <sy:updatePeriod>weekly</sy:updatePeriod>
+  <itunes:category text="Society & Culture"/>
+  <image><url>https://marmita.pt/images/thumbnail.jpg</url></image>
+
+  <item>
+    <title>#20 Rapar O Tacho</title>
+    <link>https://marmita.pt/post/s01e20/</link>
+    <pubDate>Fri, 29 Jan 2021 00:00:00 +0000 </pubDate>
+    <description>Chegamos ao fim desta temporada. O que foi e o que vem depois?</description>
+    <content:encoded>
+      <![CDATA[ <p>É verdade, chegamos hoje ao episódio 20, no qual marcamos ......</p> ]]>
+    </content:encoded>
+    <enclosure
+*      url="https://media.blubrry.com/marmitaderedon/archive.org/download/marmitaderedon-s01e20/s01e20-rapar_o_tacho.mp3" 
+      length="25356837" type="audio/mpeg" />
+    <itunes:image href="https://marmita.pt/images/s01e20.jpg"/>
+    <itunes:episode>20</itunes:episode>
+    <itunes:duration>0:17:36</itunes:duration>
+  </item>
+  <item>
+...
+```
+
+]]
+
 
 ???
 
 - RSS Feed
 - Audio alojado em servidores
+
+---
+
+# Componentes de um podcast
+
+.center[
+
+## Essenciais
+
+- Conteúdo
+- Captação
+- Ficheiros áudio
+- Alojamento
+- Feed RSS
+]
+
+.left-column.center[
+## Recomendados
+
+- Site oficial
+- Redes sociais
+- Marca
+- Estatísticas
+
+]
+
+.right-column.center[
+## Opcionais
+
+- Periodicidade
+- Monetização
+- Um plano
+]
+
+
+---
+
+template: impact
+name: gravacao
+
+# Gravação e Captura
+
+---
+
+# Microfones
+
+.left-column[
+## Condensadores
+- som mais detalhado e nítido
+- maior captação de baixas frequências (graves)
+- normalmente precisam de _phantom power_
+
+.center[
+<br>
+<img src="img/condenser-mic.jpeg" height="200px"/>
+.tiny[
+"In Front of a Microphone" by [Dejan Krsmanovic](https://www.flickr.com/photos/dejankrsmanovic/44223347312/)
+]
+]
+]
+
+.right-column[
+## Dinâmicos
+- melhores cancelamento de ruído de fundo
+- mais resistentes
+- maior variação de volume sem distorção
+
+.center[
+<br>
+<img src="img/shure-sm58.jpeg" height="200px"/>
+.tiny[
+"Shure SM58" by [Elías Gómez](https://www.flickr.com/photos/egomez/3519651938/)
+]
+]
+]
+
+
+---
+
+# Microfones - Conexões
+
+- P2/P3 - ligam diretamente ao _smartphone_ ou à porta de microfone do computador
+- XLR - ligam a uma interface ou mesa de som
+- USB - ligam diretamente ao computador
+
+.center[
+<br><br>
+<img height="190px" style="padding: 0px 20px;" src="img/3.5mm.jpeg">
+<img height="190px" style="padding: 0px 20px;" src="img/xlr_jack.jpeg">
+<img height="190px" style="padding: 0px 20px;" src="img/samson_Q2U_bottom.jpeg">
+]
+
+.tiny[
+- "3.5mm" by [Lee Bennett](https://flic.kr/p/4v9Zrp)
+- "XLR Audio Connector for microphone cable" by [Marco Verch Professional](https://flic.kr/p/2jSFPmE)
+- "Samson Q2U USB/XLR Dynamic Microphone" by [Samson](http://www.samsontech.com/samson/products/microphones/usb-microphones/q2u/)
+]
+
+
+???
+
+- P2/P3 - Pior qualidade. Além disso, a porta de microfone de um computador é frequentemente de fraca qualidade
+- XLR - ligam a uma interface ou mesa de som
+- USB - ligam diretamente ao computador
+
+---
+
+# Captação
+
+.left-column[
+- Correto uso do microfone
+    - distância
+    - pop filter
+    - suporte
+- Ambiente à volta
+    - espaço onde se grava
+    - ruídos internos
+    - ruídos externos
+]
+
+.right-column.center[
+<img width="80%" src="img/podcast_setup.jpeg">
+.tiny[
+"Podcasting Mic on Shock Mount" by [Kertojan ääni](https://flic.kr/p/291UTUw)
+]
+]
+
+???
+
+- Sala onde se grava:  
+  Tamanho e forma da sala, distância às paredes, presença de objetos, ...
+  tudo o que está à volta do microfone influencia o "ambiente" de gravação.
+- Ruídos "cá dentro":  
+  Coisas como teclado, ruído do computador (ventoínha ligada), ar condicionado,
+  cadeira onde estamos sentados que faz barulho quando nos mexemos, 
+  manusear objetos que façam ruído (eg: papel), vibrações (ou pancadas) na mesa, ...
+- Ruídos "lá fora":  
+  Isolamento das portas e janelas, pancadas nas paredes (obras do vizinho), ...
+
+
+---
+
+# Captação - Como foi feito (sem custos)
+
+.left-column[
+## Gravação com o Smartphone
+
+\+ Melhor custo (zero)
+
+\+ Acessível
+
+\+ "suficiente" para publicar um podcast
+
+\- não tem qualidade profissional
+]
+.right-column.center[
+<img width="70%" src="img/me_recording.jpeg">
+]
+
+
+---
+
+template: impact
+name: edição
+
+# Edição sonora
+
+---
+
+# Processo
+
+.left-column[
+- Importar todos as faixas
+- Sincronizar falas (com ajuda de um _master_)
+- "Corte e costura"
+    - pré-filtros
+    - silenciar ruídos
+    - remover sobreposições de falas
+    - tornar interrupções mais naturais
+- Masterização
+    - Equalização
+    - Filtros
+    - Compressão
+    - Modelação 8D*
+- Rederização
+]
+
+.right-column.center[
+<img height="80px" src="img/Audacity_Logo_signika_512_inverted_transparent.png">
+]
+
+--
+
+.right-column[
+
+### *Modelação 8D
+
+- Disposição espacial dos hosts <br> (Cada host tem um lugar espacial diferente)
+- Impercetível em Mono
+- Feito de forma automática através de uma [macro no audacity](https://github.com/marmita-de-redon/audacity-macros)
+    - Isolamento estéreo de cada faixa
+    - Diferentes amplitudes em cada canal
+    - Atrasos artificiais em canais isolados
+]
+
 
 ---
 
@@ -132,8 +411,20 @@ name: website
 
 ---
 
+# Necessidade de um website
 
-# Website
+.left-column[
+- Necessidades
+  - visualmente simples
+  - listar artigos (episódios) com imagem
+  - suporte mobile
+  - suporte de RSS feeds para podcast
+  - nice-to-have: tema escuro
+]
+
+---
+
+# Static HTML / Headless CMS - Hugo
 
 .left-column[
 - Necessidades
@@ -162,7 +453,7 @@ name: website
 
 ---
 
-# Website
+# Layout
 
 .center[
 <img height="400px" style="border: 2px solid #2db4fd;" src="img/website-desktop.png">
@@ -171,7 +462,7 @@ name: website
 
 ---
 
-# Website
+# Hugo
 
 .left-column.tiny[
 ```
@@ -268,7 +559,7 @@ name: publicacao
 
 ---
 
-# Publicação
+# Fluxo de Publicação
 
 .left-column[
 - gravar
@@ -291,7 +582,7 @@ name: publicacao
 
 ---
 
-# Publicação
+# Fluxo de Publicação - Automatizado
 
 .left-column[
 - gravar
@@ -328,7 +619,7 @@ name: automatizacao
 
 ---
 
-# Automatização
+# Shell script - claro, porque não...
 
 ```bash
 function .main() {
@@ -347,7 +638,7 @@ function .main() {
 
 ---
 
-# Automatização
+# Automatização - criação do thumbnail
 
 `.generate_thumbnail`
 
@@ -387,7 +678,7 @@ img_rgb.save(image_dest)
 
 ---
 
-# Automatização
+# Automatização - upload do áudio
 
 `.upload_audio_to_archive_org`
 
@@ -404,7 +695,7 @@ img_rgb.save(image_dest)
 
 ---
 
-# Automatização
+# Automatização - renderização do vídeo
 
 `.render_video`
 
@@ -421,7 +712,7 @@ ffmpeg \
 ]
 ---
 
-# Automatização
+# Automatização - upload para youtube
 
 `.upload_to_youtube`
 
@@ -466,7 +757,7 @@ https://github.com/ubuntupodcast/podpublish#youtube-api
 
 ---
 
-# Automatização
+# Automatização - criação do novo episódio
 
 `.create_markdown_file`
 
@@ -516,7 +807,7 @@ ${FOOTER_MD_TEXT}"
 ]
 ---
 
-# Automatização
+# Automatização - publicação
 
 `.commit_and_push_website`
 
