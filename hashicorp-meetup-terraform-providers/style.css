@@ -80,8 +80,7 @@ code {
 }
 
 .remark-code-line-highlighted {
-  color: #EAE9E7;
-  background-color: rgba(107, 76, 97, 0.733);
+  background-color: rgba(200, 200, 200, 0.733);
 }
 
 .remark-code-line-highlighted-removed-bg {
@@ -98,7 +97,7 @@ code {
 }
 
 .remark-code-line-highlighted-added {
-  background-color: rgb(117, 168, 65);
+  background-color: rgba(117, 168, 65, 0.2);
 }
 
 .remark-slide-content .small {

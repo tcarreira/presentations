@@ -99,15 +99,15 @@ name: agenda
 <div class="tiny" style="margin-left: 100px;">
 .left-column[
 - [Terraform Plugin Framework](#terraform-plugin-framework)
-- [Provider Client](#provider-client)
+- [Cliente Provider](#provider-client)
 - [Data Source](#data-source)
 - [Resource CRUD](#resource-crud)
 ]
 .right-column[
 - [Resource import](#resource-import)
-- [Testing](#testing)
-- [Documentation](#documentation)
-- [Publishing](#publishing)
+- [Testes](#testing)
+- [Documentação](#documentation)
+- [Publicar](#publishing)
 ]
 </div>
 
@@ -121,29 +121,68 @@ name: docker-best-practices
 
 <img src="img/terraform-logo.svg" width="400">
 
-
 ---
 
 # Terraform
 
+.left-column[
 - Infrastructure as Code
 - State as code (ensure state)
-  - Declarative
-  - HashiCorp Configuration Language (HCL)
+- Declarative
+- HashiCorp Configuration Language (HCL)
 - Write -> Plan -> Apply
 - Concepts
   - Data Sources
   - Resources
-  - Providers
   - Modules
+  - Providers (plugins)
+
+  ]
 
 ???
 
-comments
+infra, but not only.
+Everything with an API can be managed its state by terraform.
+
+- Data Sources: info from outside terraform
+- Resources: infrastructure object managed by terraform
+- Modules: templates/recipes of terraform code
+- Providers:
+  - implements resource types
+  - speaks with external API
+  - terraform &lt;--(provider)--&gt; API
+
+--
+
+.right-column.tiny[
+```hcl
+terraform {
+  required_providers {
+    hashicups = {
+      source = "hashicorp.com/edu/hashicups-pf"
+    }
+  }
+}
+
+<+>provider "hashicups" {
+<+>  host     = "http://localhost:19090"
+<+>  username = "admin"
+<+>}
+
+<+>data "hashicups_coffees" "edu" {}
+
+<+>resource "hashicups_order" "edu" {
+<+>  items = [
+<+>    ...
+<+>  ]
+<+>}
+
+```
+
+]
 
 
 ---
-
 
 template: impact
 
@@ -185,17 +224,21 @@ https://developer.hashicorp.com/terraform/tutorials/providers
 
 # Questions/Suggestions?
 
+&nbsp;
+.tiny[
+&nbsp;
+]
+
+<img src="img/qr.png" style="position: absolute;" width="350">
+
 .center[
 <span style="font-size: 5em;">?</span>
 ]
 
-.left-column[
+.small.align-right.no-bullets.right-column[
 - **telegram:** https://t.me/tcarreira
 - **github:** https://github.com/tcarreira
 - **web:** https://tiago.carreira.pw
-]
-.right-column[
-
 ]
 
 
@@ -231,42 +274,26 @@ template: title
   <script src="jquery.min.js"></script>
   <script>
     Array.from($(".remark-code-line")).forEach((el) => {
-      el.innerHTML = el.innerHTML
-        .replace(
-          "&lt;--&gt;",
-          '<span class="remark-code-line-highlighted-removed-bg">'
-        )
-        .replace("&lt;/--&gt;", "</span>");
-      el.innerHTML = el.innerHTML
-        .replace(
-          "&lt;red&gt;",
-          '<span class="remark-code-line-highlighted-red">'
-        )
-        .replace("&lt;/red&gt;", "</span>");
-      el.innerHTML = el.innerHTML
-        .replace(
-          "&lt;-&gt;",
-          '<span class="remark-code-line-highlighted-removed">'
-        )
-        .replace("&lt;/-&gt;", "</span>");
-      el.innerHTML = el.innerHTML
-        .replace(
-          "&lt;+&gt;",
-          '<span class="remark-code-line-highlighted-added">'
-        )
-        .replace("&lt;/+&gt;", "</span>");
-      el.innerHTML = el.innerHTML
-        .replace(
-          "&lt;+&gt;",
-          '<span class="remark-code-line-highlighted-added">'
-        )
-        .replace("&lt;/+&gt;", "</span>");
-      el.innerHTML = el.innerHTML
-        .replace("&lt;=&gt;", '<span class="remark-code-line-highlighted">')
-        .replace("&lt;/=&gt;", "</span>");
-      el.innerHTML = el.innerHTML
-        .replace("&lt;=&gt;", '<span class="remark-code-line-highlighted">')
-        .replace("&lt;/=&gt;", "</span>");
+      if (el.innerHTML.includes("&lt;--&gt;") ){
+        el.innerHTML = el.innerHTML.replace("&lt;--&gt;", '').replace("&lt;/--&gt;", "");
+        el.classList.add("remark-code-line-highlighted-removed");
+      }
+      if (el.innerHTML.includes("&lt;red&gt;") ){
+        el.innerHTML = el.innerHTML.replace("&lt;red&gt;", '').replace("&lt;/red&gt;", "");
+        el.classList.add("remark-code-line-highlighted-red");
+      }
+      if (el.innerHTML.includes("&lt;-&gt;") ){
+        el.innerHTML = el.innerHTML.replace("&lt;-&gt;", '').replace("&lt;/-&gt;", "");
+        el.classList.add("remark-code-line-highlighted-removed");
+      }
+      if (el.innerHTML.includes("&lt;+&gt;") ){
+        el.innerHTML = el.innerHTML.replace("&lt;+&gt;", '').replace("&lt;/+&gt;", "");
+        el.classList.add("remark-code-line-highlighted-added");
+      }
+      if (el.innerHTML.includes("&lt;=&gt;") ){
+        el.innerHTML = el.innerHTML.replace("&lt;=&gt;", '').replace("&lt;/=&gt;", "");
+        el.classList.add("remark-code-line-highlighted");
+      }
     });
 
     // Css hack (remove top margin if column has h2 inside)
