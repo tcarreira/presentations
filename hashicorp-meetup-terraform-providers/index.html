@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Terraform Providers</title>
+  <meta charset="utf-8" />
+  <style>
+    @import url(style.css);
+  </style>
+</head>
+
+<body>
+  <textarea id="source">
+
+
+name: inverse
+layout: true
+class: center, middle, inverse
+
+---
+
+name: impact
+layout: true
+class: center, middle, impact, content
+
+---
+
+name: title
+layout: true
+class: title center
+
+---
+
+name: content
+layout: true
+
+---
+
+template: title
+name: main-title
+
+
+.content[
+
+# Terraform Providers
+
+.no-bullets[
+- Tiago Carreira
+]
+]
+
+---
+
+
+# Sobre mim
+## Tiago Carreira
+
+.left-column[
+
+
+- DevOps Engineer @ tsuru.io (Globo)
+- 🇵🇹 &rarr; Rio de Janeiro
+.small[
+- Engenharia Eletrotécnica e de Computadores
+- 10+ anos de experiência com Linux
+- linguagens: bash, python, **go**
+- editor de texto: vscode, vim
+- .tiny[ **keywords:** DevOps, Automação, CI/CD, Docker, Cerveja]
+]
+]
+
+
+.rigth-column[
+.center.pic-circle[
+<img src="img/tcarreira.jpg" width="180">
+]
+
+.center.no-bullets.tiny[
+- **telegram:** https://t.me/tcarreira
+- **github:** https://github.com/tcarreira
+- **web:** https://tiago.carreira.pw
+]
+
+]
+
+---
+
+layout: false
+template: impact
+name: agenda
+
+# Agenda
+
+.content.align-left[
+- [Terraform](#what-is-terraform)
+- [Terraform Provider](#what-is-terraform-provider)
+- [Criando um Provider:](#creating-a-provider)
+
+<div class="tiny" style="margin-left: 100px;">
+.left-column[
+- [Terraform Plugin Framework](#terraform-plugin-framework)
+- [Provider Client](#provider-client)
+- [Data Source](#data-source)
+- [Resource CRUD](#resource-crud)
+]
+.right-column[
+- [Resource import](#resource-import)
+- [Testing](#testing)
+- [Documentation](#documentation)
+- [Publishing](#publishing)
+]
+</div>
+
+]
+
+---
+
+layout: false
+template: impact
+name: docker-best-practices
+
+<img src="img/terraform-logo.svg" width="400">
+
+
+---
+
+# Terraform
+
+- Infrastructure as Code
+- State as code (ensure state)
+  - Declarative
+  - HashiCorp Configuration Language (HCL)
+- Write -> Plan -> Apply
+- Concepts
+  - Data Sources
+  - Resources
+  - Providers
+  - Modules
+
+???
+
+comments
+
+
+---
+
+
+template: impact
+
+.content[
+
+# What next
+
+]
+
+---
+
+
+# References
+
+[1] Call APIs with Custom Framework Providers<br>
+https://developer.hashicorp.com/terraform/tutorials/providers-plugin-framework
+
+---
+
+# Watch Later
+
+https://tcarreira.github.io/presentations/hashicorp-meetup-terraform-providers/
+
+.tiny[
+https://github.com/tcarreira/presentations/tree/main/hashicorp-meetup-terraform-providers
+]
+
+<img src="img/qr.png" style="position: absolute;" width="350">
+
+
+.align-right.tiny[
+<br><br><br><br><br><br><br><br><br><br>
+**note:**<br>
+deprecated tutorial:<br >
+https://developer.hashicorp.com/terraform/tutorials/providers
+]
+
+---
+
+# Questions/Suggestions?
+
+.center[
+<span style="font-size: 5em;">?</span>
+]
+
+.left-column[
+- **telegram:** https://t.me/tcarreira
+- **github:** https://github.com/tcarreira
+- **web:** https://tiago.carreira.pw
+]
+.right-column[
+
+]
+
+
+---
+
+template: title
+
+.content[
+<br><br>
+# Terraform Providers
+]
+
+.content[.align-center[
+## Obrigado
+]]
+
+
+    </textarea>
+  <!--
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    -->
+  <script src="remark-latest.min.js"></script>
+  <script>
+    var slideshow = remark.create({
+      slideNumberFormat: "%current%",
+      ratio: "16:9",
+      highlightStyle: "googlecode",
+      highlightLines: true,
+      highlightSpans: true,
+    });
+  </script>
+  <script src="jquery.min.js"></script>
+  <script>
+    Array.from($(".remark-code-line")).forEach((el) => {
+      el.innerHTML = el.innerHTML
+        .replace(
+          "&lt;--&gt;",
+          '<span class="remark-code-line-highlighted-removed-bg">'
+        )
+        .replace("&lt;/--&gt;", "</span>");
+      el.innerHTML = el.innerHTML
+        .replace(
+          "&lt;red&gt;",
+          '<span class="remark-code-line-highlighted-red">'
+        )
+        .replace("&lt;/red&gt;", "</span>");
+      el.innerHTML = el.innerHTML
+        .replace(
+          "&lt;-&gt;",
+          '<span class="remark-code-line-highlighted-removed">'
+        )
+        .replace("&lt;/-&gt;", "</span>");
+      el.innerHTML = el.innerHTML
+        .replace(
+          "&lt;+&gt;",
+          '<span class="remark-code-line-highlighted-added">'
+        )
+        .replace("&lt;/+&gt;", "</span>");
+      el.innerHTML = el.innerHTML
+        .replace(
+          "&lt;+&gt;",
+          '<span class="remark-code-line-highlighted-added">'
+        )
+        .replace("&lt;/+&gt;", "</span>");
+      el.innerHTML = el.innerHTML
+        .replace("&lt;=&gt;", '<span class="remark-code-line-highlighted">')
+        .replace("&lt;/=&gt;", "</span>");
+      el.innerHTML = el.innerHTML
+        .replace("&lt;=&gt;", '<span class="remark-code-line-highlighted">')
+        .replace("&lt;/=&gt;", "</span>");
+    });
+
+    // Css hack (remove top margin if column has h2 inside)
+    $(".left-column:has(h2)").addClass("remove-top-space");
+    $(".right-column:has(h2)").addClass("remove-top-space");
+  </script>
+</body>
+
+</html>

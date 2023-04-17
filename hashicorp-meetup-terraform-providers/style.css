@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed|Ubuntu+Mono&display=swap');
+body {
+  font-family: 'Ubuntu', sans-serif;
+  line-height: 1.5;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+h2, h3 {
+  font-weight: normal;
+}
+
+.remark-slide-content {
+  font-size: 25px;
+  background-image: url('img/template/bg-slides.png');
+  background-size: contain;
+}
+
+.remark-slide-content h1 {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 45px;
+  color: #E95420;
+}
+
+.remark-slide-content h2 {
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 35px;
+  color: #ED764D;
+}
+
+.remark-slide-content h3 {
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 25px;
+  color: #AEA79F;
+}
+
+.remark-slide-number {
+  left: 10px;
+  bottom: 6px;
+  right: auto;
+  color: #FBDDD2;
+  opacity: 1.8;
+}
+
+.title .remark-slide-number {
+  display: none;
+}
+
+img {
+  max-width: 95%;
+}
+
+p li {
+  line-height: 1.5;
+}
+
+.remark-notes li {
+  line-height: 1.1;
+}
+
+code {
+  font-family: 'Ubuntu Mono', monospace;
+}
+
+.remark-code, .hljs-default .hljs {
+  font-size: 25px;
+  border-radius: 5px;
+  display: block;
+  padding: .5em;
+  overflow-x: auto;
+  background: #E2E0DD;
+  color: #111111;
+}
+
+.remark-inline-code {
+  background: #E2E0DD;
+  color: #111111;
+}
+
+.remark-code-line-highlighted {
+  color: #EAE9E7;
+  background-color: rgba(107, 76, 97, 0.733);
+}
+
+.remark-code-line-highlighted-removed-bg {
+  text-decoration: line-through;
+  background-color: #ff9085;
+}
+
+.remark-code-line-highlighted-red {
+  background-color: #ff9085;
+}
+
+.remark-code-line-highlighted-removed {
+  text-decoration: line-through;
+}
+
+.remark-code-line-highlighted-added {
+  background-color: rgb(117, 168, 65);
+}
+
+.remark-slide-content .small {
+  font-size: 18px;
+}
+
+.remark-slide-content .tiny {
+  font-size: 16px;
+}
+
+.small {
+  font-size: 18px;
+}
+
+.tiny {
+  font-size: 16px;
+}
+
+.small .remark-code {
+  font-size: 20px;
+  line-height: 1.2em;
+}
+
+.tiny .remark-code {
+  font-size: 16px;
+  line-height: 1.1em;
+}
+
+.remark-notes-current-area .remark-code {
+  font-size: inherit;
+  line-height: 1.3em;
+}
+
+.title {
+  vertical-align: middle;
+  background-image: url('img/template/bg-title.png');
+  background-size: contain;
+  text-align: right;
+}
+
+.title .content {
+  width: 70%;
+  float: right;
+  text-align: right;
+}
+
+.title h1 {
+  font-size: 60px;
+}
+
+.title h2 {
+  font-size: 50px;
+}
+
+.title h3 {
+  font-size: 40px;
+}
+
+.pic img {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.pic-circle img {
+  vertical-align: middle;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.impact {
+  background-image: url('img/template/bg-impact.png');
+  background-size: contain;
+}
+
+.impact .content {
+  width: 75%;
+  margin: auto;
+  color: #444;
+}
+
+.impact h1 {
+  font-size: 60px;
+}
+
+.inverse {
+  background: #5E2750;
+  color: #eee;
+  text-shadow: 0 0 20px #2C001E;
+}
+
+.inverse h1, .inverse h2 {
+  color: #eee;
+  line-height: 1.1em;
+  /* background-color: #2C001E; */
+}
+
+/* Two-column layout */
+
+.left-column {
+  width: 48%;
+  float: left;
+}
+
+.right-column {
+  width: 48%;
+  float: right;
+}
+
+.no-column {
+  clear: both;
+}
+
+.remove-top-space {
+  margin-block-start: -30.15px;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.v-align-top {
+  vertical-align: top;
+}
+
+.v-align-mid {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.v-align-bottom {
+  vertical-align: bottom;
+}
+
+.no-bullets li {
+  list-style-type: none;
+}
+
+a:link, a:visited {
+  color: rgb(10, 10, 142)
+}
