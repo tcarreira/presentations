@@ -11,269 +11,8 @@
 
 <body>
   <textarea id="source">
+  </textarea>
 
-
-name: inverse
-layout: true
-class: center, middle, inverse
-
----
-
-name: impact
-layout: true
-class: center, middle, impact, content
-
----
-
-name: title
-layout: true
-class: title center
-
----
-
-name: content
-layout: true
-
----
-
-template: title
-name: main-title
-
-
-.content[
-
-# Terraform Providers
-
-.no-bullets[
-- Tiago Carreira
-]
-]
-
----
-
-
-# Sobre mim
-## Tiago Carreira
-
-.left-column[
-
-
-- DevOps Engineer @ tsuru.io (Globo)
-- 🇵🇹 &rarr; Rio de Janeiro
-.small[
-- Engenharia Eletrotécnica e de Computadores
-- 10+ anos de experiência com Linux
-- linguagens: bash, python, **go**
-- editor de texto: vscode, vim
-- .tiny[ **keywords:** DevOps, Automação, CI/CD, Docker, Cerveja]
-]
-]
-
-
-.rigth-column[
-.center.pic-circle[
-<img src="img/tcarreira.jpg" width="180">
-]
-
-.center.no-bullets.tiny[
-- **telegram:** https://t.me/tcarreira
-- **github:** https://github.com/tcarreira
-- **web:** https://tiago.carreira.pw
-]
-
-]
-
----
-
-layout: false
-template: impact
-name: agenda
-
-# Agenda
-
-.content.align-left[
-- [Terraform](#what-is-terraform)
-- [Terraform Provider](#what-is-terraform-provider)
-- [Criando um Provider:](#creating-a-provider)
-
-<div class="tiny" style="margin-left: 100px;">
-.left-column[
-- [Terraform Plugin Framework](#terraform-plugin-framework)
-- [Cliente Provider](#provider-client)
-- [Data Source](#data-source)
-- [Resource CRUD](#resource-crud)
-]
-.right-column[
-- [Resource import](#resource-import)
-- [Testes](#testing)
-- [Documentação](#documentation)
-- [Publicar](#publishing)
-]
-</div>
-
-]
-
----
-
-layout: false
-template: impact
-name: docker-best-practices
-
-<img src="img/terraform-logo.svg" width="400">
-
----
-
-# Terraform
-
-.left-column[
-- Infrastructure as Code
-- State as code (ensure state)
-- Declarative
-- HashiCorp Configuration Language (HCL)
-- Write -> Plan -> Apply
-- Concepts
-  - Data Sources
-  - Resources
-  - Modules
-  - Providers (plugins)
-
-  ]
-
-???
-
-infra, but not only.
-Everything with an API can be managed its state by terraform.
-
-- Data Sources: info from outside terraform
-- Resources: infrastructure object managed by terraform
-- Modules: templates/recipes of terraform code
-- Providers:
-  - implements resource types
-  - speaks with external API
-  - terraform &lt;--(provider)--&gt; API
-
---
-
-.right-column.tiny[
-```hcl
-terraform {
-  required_providers {
-    hashicups = {
-      source = "hashicorp.com/edu/hashicups-pf"
-    }
-  }
-}
-
-<+>provider "hashicups" {
-<+>  host     = "http://localhost:19090"
-<+>  username = "admin"
-<+>}
-
-<+>data "hashicups_coffees" "edu" {}
-
-<+>resource "hashicups_order" "edu" {
-<+>  items = [
-<+>    ...
-<+>  ]
-<+>}
-
-```
-
-]
-
----
-
-# Terraform Providers (Plugins)
-
-O Terraform depende de plugins chamados *providers* para interagir com provedores de cloud, SaaS e outras APIs.
-
-.center[
-<img src="img/tf-plugins-arch.png" width="100%">
-]
-.tiny.align-right[
-\* image: https://developer.hashicorp.com/terraform/tutorials/providers/provider-use
-]
-
-
----
-
-template: impact
-
-.content[
-
-# What next
-
-]
-
----
-
-
-# References
-
-[1] Call APIs with Custom Framework Providers<br>
-https://developer.hashicorp.com/terraform/tutorials/providers-plugin-framework
-
----
-
-# Watch Later
-
-https://tcarreira.github.io/presentations/hashicorp-meetup-terraform-providers/
-
-.tiny[
-https://github.com/tcarreira/presentations/tree/main/hashicorp-meetup-terraform-providers
-]
-
-<img src="img/qr.png" style="position: absolute;" width="350">
-
-
-.align-right.tiny[
-<br><br><br><br><br><br><br><br><br><br>
-**note:**<br>
-deprecated tutorial:<br >
-https://developer.hashicorp.com/terraform/tutorials/providers
-]
-
----
-
-# Questions/Suggestions?
-
-&nbsp;
-.tiny[
-&nbsp;
-]
-
-<img src="img/qr.png" style="position: absolute;" width="350">
-
-.center[
-<span style="font-size: 5em;">?</span>
-]
-
-.small.align-right.no-bullets.right-column[
-- **telegram:** https://t.me/tcarreira
-- **github:** https://github.com/tcarreira
-- **web:** https://tiago.carreira.pw
-]
-
-
----
-
-template: title
-
-.content[
-<br><br>
-# Terraform Providers
-]
-
-.content[.align-center[
-## Obrigado
-]]
-
-
-    </textarea>
-  <!--
-    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
-    </script>
-    -->
   <script src="remark-latest.min.js"></script>
   <script>
     var slideshow = remark.create({
@@ -287,32 +26,42 @@ template: title
         touch: false,
         click: false,
       },
+      sourceUrl: "./index.md",
     });
   </script>
   <script src="jquery.min.js"></script>
   <script>
-    Array.from($(".remark-code-line")).forEach((el) => {
-      if (el.innerHTML.includes("&lt;--&gt;") ){
-        el.innerHTML = el.innerHTML.replace("&lt;--&gt;", '').replace("&lt;/--&gt;", "");
-        el.classList.add("remark-code-line-highlighted-removed");
+    var existCondition = setInterval(function () {
+      console.log("waiting for markdown load...")
+      if ($('.remark-slides-area').length) {
+        console.log("Start some replacements");
+        clearInterval(existCondition);
+
+        Array.from($(".remark-code-line")).forEach((el) => {
+          if (el.innerHTML.includes("&lt;--&gt;")) {
+            el.innerHTML = el.innerHTML.replace("&lt;--&gt;", '').replace("&lt;/--&gt;", "");
+            el.classList.add("remark-code-line-highlighted-removed");
+          }
+          if (el.innerHTML.includes("&lt;red&gt;")) {
+            el.innerHTML = el.innerHTML.replace("&lt;red&gt;", '').replace("&lt;/red&gt;", "");
+            el.classList.add("remark-code-line-highlighted-red");
+          }
+          if (el.innerHTML.includes("&lt;-&gt;")) {
+            el.innerHTML = el.innerHTML.replace("&lt;-&gt;", '').replace("&lt;/-&gt;", "");
+            el.classList.add("remark-code-line-highlighted-removed");
+          }
+          if (el.innerHTML.includes("&lt;+&gt;")) {
+            el.innerHTML = el.innerHTML.replace("&lt;+&gt;", '').replace("&lt;/+&gt;", "");
+            el.classList.add("remark-code-line-highlighted-added");
+          }
+          if (el.innerHTML.includes("&lt;=&gt;")) {
+            el.innerHTML = el.innerHTML.replace("&lt;=&gt;", '').replace("&lt;/=&gt;", "");
+            el.classList.add("remark-code-line-highlighted");
+          }
+        });
+        console.log("Finished some replacements");
       }
-      if (el.innerHTML.includes("&lt;red&gt;") ){
-        el.innerHTML = el.innerHTML.replace("&lt;red&gt;", '').replace("&lt;/red&gt;", "");
-        el.classList.add("remark-code-line-highlighted-red");
-      }
-      if (el.innerHTML.includes("&lt;-&gt;") ){
-        el.innerHTML = el.innerHTML.replace("&lt;-&gt;", '').replace("&lt;/-&gt;", "");
-        el.classList.add("remark-code-line-highlighted-removed");
-      }
-      if (el.innerHTML.includes("&lt;+&gt;") ){
-        el.innerHTML = el.innerHTML.replace("&lt;+&gt;", '').replace("&lt;/+&gt;", "");
-        el.classList.add("remark-code-line-highlighted-added");
-      }
-      if (el.innerHTML.includes("&lt;=&gt;") ){
-        el.innerHTML = el.innerHTML.replace("&lt;=&gt;", '').replace("&lt;/=&gt;", "");
-        el.classList.add("remark-code-line-highlighted");
-      }
-    });
+    }, 100); // check every 100ms
 
     // Css hack (remove top margin if column has h2 inside)
     $(".left-column:has(h2)").addClass("remove-top-space");
