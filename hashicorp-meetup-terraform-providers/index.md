@@ -226,7 +226,8 @@ Newest: Terraform Plugin Framework
 Template:
 https://github.com/hashicorp/terraform-provider-scaffolding-framework
 
-
+Client:
+https://github.com/tcarreira/api-server
 
 ---
 
@@ -266,6 +267,38 @@ func New(version string) func() provider.Provider {}
 
 # Client Provider
 
+.tiny[
+
+```sh
+go get "github.com/tcarreira/api-server/pkg/client@v0.1.0"
+```
+
+```go
+import (... "github.com/tcarreira/api-server/pkg/client" ...)
+
+var _ provider.Provider = &APIServerProvider{}
+type APIServerProvider struct {
+	version   string
+<+>	APIClient client.APIClient
+}
+
+func (p *APIServerProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
+	...
+	if !data.Endpoint.IsNull() {
+		cli, err := client.NewAPIClient(client.Config{
+			Endpoint: data.Endpoint.String(),
+		})
+		if err != nil {
+			resp.Diagnostics.AddError("failed to create api client", err.Error())
+			return
+		}
+		p.APIClient = cli
+	}
+	...
+}
+
+```
+]
 
 ---
 
