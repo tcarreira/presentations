@@ -232,8 +232,35 @@ https://github.com/hashicorp/terraform-provider-scaffolding-framework
 
 # Terraform Plugin Framework
 
+.tiny[
+```golang
+// internal/provider/provider.go
 
-
+<+>var _ provider.Provider = &APIServerProvider{}
+type APIServerProvider struct {...}
+type APIServerProviderModel struct {
+	Endpoint types.String 'tfsdk:"endpoint"'
+}
+func (p *APIServerProvider) Metadata(ctx context.Context, req provider.MetadataRequest, resp *provider.MetadataResponse) {
+	resp.TypeName = "api-server" // Changed from scafolding
+	resp.Version = p.version
+}
+func (p *APIServerProvider) Schema(ctx context.Context, req provider.SchemaRequest, resp *provider.SchemaResponse) {
+	resp.Schema = schema.Schema{
+		Attributes: map[string]schema.Attribute{
+			"endpoint": schema.StringAttribute{
+				MarkdownDescription: "Example provider attribute",
+				Optional:            true,
+			},
+		},
+	}
+}
+func (p *APIServerProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {}
+func (p *APIServerProvider) Resources(ctx context.Context) []func() resource.Resource {}
+func (p *APIServerProvider) DataSources(ctx context.Context) []func() datasource.DataSource {}
+func New(version string) func() provider.Provider {}
+```
+]
 
 ---
 
