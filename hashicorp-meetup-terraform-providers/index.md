@@ -229,6 +229,45 @@ https://github.com/hashicorp/terraform-provider-scaffolding-framework
 Client:
 https://github.com/tcarreira/api-server
 
+
+---
+
+# Terraform Plugin Framework
+
+.tiny[
+```sh
+.
+├── docs
+│   ├── data-sources
+│   │   └── example.md
+│   ├── index.md
+│   └── resources
+│       └── example.md
+├── examples
+│   └── ...
+└── internal
+    └── provider
+        ├── example_data_source.go
+        ├── example_data_source_test.go
+        ├── example_resource.go
+        ├── example_resource_test.go
+        ├── provider.go
+        └── provider_test.go
+```
+]
+
+---
+
+template: inverse
+
+# WARNING!
+
+way too many LoC
+
+???
+
+São muitas linhas de código, mas não tenham medo ;)
+
 ---
 
 # Terraform Plugin Framework
@@ -284,9 +323,9 @@ type APIServerProvider struct {
 
 func (p *APIServerProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
 	...
-	if !data.Endpoint.IsNull() {
+	if p.APIClient == nil && !data.Endpoint.IsNull() {
 		cli, err := client.NewAPIClient(client.Config{
-			Endpoint: data.Endpoint.String(),
+			Endpoint: data.Endpoint.ValueString(),
 		})
 		if err != nil {
 			resp.Diagnostics.AddError("failed to create api client", err.Error())
@@ -294,7 +333,8 @@ func (p *APIServerProvider) Configure(ctx context.Context, req provider.Configur
 		}
 		p.APIClient = cli
 	}
-	...
+	resp.DataSourceData = p.APIClient
+	resp.ResourceData = p.APIClient
 }
 
 ```
@@ -303,6 +343,128 @@ func (p *APIServerProvider) Configure(ctx context.Context, req provider.Configur
 ---
 
 # Data Source
+
+.tiny[
+```go
+var _ datasource.DataSource = &ExampleDataSource{}
+func NewExampleDataSource() datasource.DataSource {}
+type ExampleDataSourceModel struct {
+	ConfigurableAttribute types.String 'tfsdk:"configurable_attribute"'
+	Id                    types.String 'tfsdk:"id"'
+}
+func (d *ExampleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {}
+func (d *ExampleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {}
+func (d *ExampleDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {}
+<+>func (d *ExampleDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {}
+```
+]
+
+---
+
+# Data Source
+
+.tiny.left-column[
+```go
+var _ datasource.DataSource = &ExampleDataSource{}
+func NewExampleDataSource() datasource.DataSource {}
+type ExampleDataSourceModel struct {
+	ConfigurableAttribute types.String 'tfsdk:"configurable_attribute"'
+	Id                    types.String 'tfsdk:"id"'
+}
+func (d *ExampleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {}
+<+>func (d *ExampleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+<+>	resp.Schema = schema.Schema{
+<+>		MarkdownDescription: "Example data source", // documentation
+<+>		Attributes: map[string]schema.Attribute{
+<+>			"configurable_attribute": schema.StringAttribute{
+<+>				MarkdownDescription: "Example configurable attribute",
+<+>				Optional:            true,
+<+>			},
+<+>			"id": schema.StringAttribute{
+<+>				MarkdownDescription: "Example identifier",
+<+>				Computed:            true,
+<+>			},
+<+>		},
+<+>	}
+<+>}
+func (d *ExampleDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {}
+func (d *ExampleDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {}
+```
+]
+.right-column.tiny[
+```py
+# examples/data-sources/scaffolding_example/data-source.tf
+
+data "scaffolding_example" "example" {
+  configurable_attribute = "some-value"
+}
+
+output "example" {
+  value = scaffolding_example.example
+}
+```
+]
+
+
+---
+
+# Data Source
+
+.tiny.left-column[
+```go
+type PersonDataSourceModel struct {
+	Id          types.String 'tfsdk:"id"'
+	Name        types.String 'tfsdk:"name"'
+	Age         types.Int64  'tfsdk:"age"'
+	Description types.String 'tfsdk:"description"'
+}
+
+func (d *PersonDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+	resp.Schema = schema.Schema{
+		MarkdownDescription: "Person data source",
+		Attributes: map[string]schema.Attribute{
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Person identifier",
+				Required:            true,
+			},
+			"name": schema.StringAttribute{
+				MarkdownDescription: "Person name",
+				Computed:            true,
+			},
+			"age": schema.Int64Attribute{...},
+			"description": schema.StringAttribute{...},
+		},
+	}
+}
+
+```
+]
+.right-column.tiny[
+```go
+func (d *PersonDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+	d.client = req.ProviderData.(*client.APIClient)
+}
+
+func (d *PersonDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var data PersonDataSourceModel
+	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
+
+	id, _ := strconv.Atoi(data.Id.ValueString())
+	person, err := d.client.People().Get(id)
+	if err != nil {
+		resp.Diagnostics.AddError("Error getting person", err.Error())
+		return
+	}
+
+	data.Name = types.StringValue(person.Name)
+	data.Age = types.Int64Value(int64(person.Age))
+	data.Description = types.StringValue(person.Description)
+
+	// Save data into Terraform state
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+}
+```
+]
 
 
 ---
