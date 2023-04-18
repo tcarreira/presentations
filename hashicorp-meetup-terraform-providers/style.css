@@ -64,18 +64,12 @@ code {
   font-family: 'Ubuntu Mono', monospace;
 }
 
-.remark-code, .hljs-default .hljs {
-  font-size: 25px;
-  border-radius: 5px;
-  display: block;
-  padding: .5em;
-  overflow-x: auto;
-  background: #E2E0DD;
-  color: #111111;
+.remark-code, .hljs-vs .hljs {
+  background: #fff3e0;
 }
 
 .remark-inline-code {
-  background: #E2E0DD;
+  background: #edebe8;
   color: #111111;
 }
 
@@ -97,7 +91,7 @@ code {
 }
 
 .remark-code-line-highlighted-added {
-  background-color: rgba(117, 168, 65, 0.2);
+  background-color: rgba(117, 168, 65, 0.3);
 }
 
 .remark-slide-content .small {
