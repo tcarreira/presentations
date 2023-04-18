@@ -534,7 +534,7 @@ example = {
       "type": "apiserver_person",
       "name": "example",
       "provider": "provider[\"registry.terraform.io/tcarreira/apiserver\"]",
-      "instances": [ { "schema_version": 0, 
+      "instances": [ { "schema_version": 0,
         "attributes": { "age": 34, "description": "", "id": "0", "name": "Tiago" },
       }]
     }
@@ -558,9 +558,8 @@ name:resource-crud
 
 .tiny[
 ```go
-// Ensure provider defined types fully satisfy framework interfaces.
-var _ resource.Resource = &ExampleResource{}
-
+// internal/provider/example_resource.go
+var _ resource.Resource = &ExampleResource{} // Ensure provider defined types fully satisfy framework interfaces.
 func NewExampleResource() resource.Resource {}
 type ExampleResource struct {}
 type ExampleResourceModel struct {}
@@ -575,7 +574,93 @@ func (r *ExampleResource) Configure(ctx context.Context, req resource.ConfigureR
 <+>func (r *ExampleResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {}
 
 ```
+```go
+// internal/provider/provider.go
+func (p *APIServerProvider) Resources(ctx context.Context) []func() resource.Resource {
+	return []func() resource.Resource{
+		NewExampleResource,
+	}
+}
+```
 ]
+
+---
+
+## create
+
+.tiny[
+```go
+func (r *PersonResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data *PersonResourceModel
+<+>	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	person := &apiTypes.Person{
+		Name:        data.Name.ValueString(),
+		Age:         int(data.Age.ValueInt64()),
+		Description: data.Description.ValueString(),
+	}
+<+>	err := r.client.People().Create(person)
+	if err != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create person, got error: %s", err))
+		return
+	}
+
+<+>	data.Id = types.StringValue(strconv.Itoa(person.ID))
+<+>	data.LastUpdated = types.StringValue(time.Now().Format(time.RFC3339))
+
+<+>	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+}
+```
+]
+
+???
+
+- read tf data from `req`
+- call API
+- set resource ID
+- save State
+
+---
+
+## read
+
+.tiny[
+```go
+func (r *PersonResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data *PersonResourceModel
+<+>	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	id, _ := strconv.Atoi(data.Id.ValueString())
+<+>	person, err := r.client.People().Get(id)
+	if err != nil {
+		resp.Diagnostics.AddError("Error getting person", err.Error())
+		return
+	}
+
+<+>	data.Name = types.StringValue(person.Name)
+<+>	data.Age = types.Int64Value(int64(person.Age))
+<+>	data.Description = types.StringValue(person.Description)
+<+>	if data.LastUpdated.ValueString() == "" {
+<+>		data.LastUpdated = types.StringValue(time.Now().Format(time.RFC3339))
+<+>	}
+
+<+>	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+}
+```
+]
+
+???
+
+- read tf data from `req`
+- call API
+- set resource ID
+- save State
 
 ---
 
