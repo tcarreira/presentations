@@ -97,7 +97,7 @@ name: agenda
 - [Resource import](#resource-import)
 - [Testes](#testing)
 - [Documentação](#documentation)
-- [Publicar](#publishing)
+- [Publicação](#publishing)
 ]
 </div>
 
@@ -921,8 +921,26 @@ https://registry.terraform.io/tools/doc-preview
 
 ---
 
+template: impact
+name: publishing
+
 # Publicação
 
+---
+
+# Publicação
+.left-column[
+Pela documentação:
+- goreleaser + github-actions
+- criar uma nova chave GPG
+- adicionar chave privada no GH (GPG_PRIVATE_KEY + PASSPHRSE)
+- adicionar chave pública no Terraform
+- criar uma tag git + `git push origin <tag>`
+- Publicar
+]
+.right-column[
+<img src="img/publish.png" width="100%">
+]
 
 ---
 
