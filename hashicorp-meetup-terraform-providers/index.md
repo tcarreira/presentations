@@ -863,13 +863,65 @@ data "apiserver_person" "test" {
 ]
 
 ---
+template: impact
+name: documentation
 
 # Documentação
 
+---
+
+# Documentação
+
+.tiny[
+.left-column[
+```sh
+go generate ./...
+```
+
+```go
+                 /* `tools/tools.go` */
+//go:build tools
+
+package tools
+
+import (
+	// Documentation generation
+	_ "github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs"
+)
+
+```
+
+<br><br><br><br><br><br>
+https://registry.terraform.io/tools/doc-preview
+]
+.right-column[
+```sh
+.
+├── docs
+│   ├── data-sources
+│   │   └── person.md
+│   ├── index.md
+│   └── resources
+│       └── person.md
+├── examples
+│   ├── README.md
+│   ├── data-sources
+│   │   └── apiserver_person
+│   │       └── data-source.tf
+│   ├── provider
+│   │   └── provider.tf
+│   └── resources
+│       └── apiserver_person
+│           └── resource.tf
+└── tools
+    └── tools.go
+```
+]
+]
 
 ---
 
-# Publicar
+# Publicação
 
 
 ---
