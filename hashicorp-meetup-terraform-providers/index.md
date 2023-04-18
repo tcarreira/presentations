@@ -352,6 +352,7 @@ name: data-source
 
 .tiny[
 ```go
+// internal/provider/example_data_source.go
 var _ datasource.DataSource = &ExampleDataSource{}
 func NewExampleDataSource() datasource.DataSource {}
 type ExampleDataSourceModel struct {
@@ -363,6 +364,16 @@ func (d *ExampleDataSource) Schema(ctx context.Context, req datasource.SchemaReq
 func (d *ExampleDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {}
 <+>func (d *ExampleDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {}
 ```
+
+```go
+// internal/provider/provider.go
+func (p *APIServerProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
+	return []func() datasource.DataSource{
+		NewExampleDataSource,
+	}
+}
+```
+
 ]
 
 ---
@@ -410,7 +421,6 @@ output "example" {
 }
 ```
 ]
-
 
 ---
 
@@ -550,7 +560,6 @@ name:resource-crud
 ```go
 // Ensure provider defined types fully satisfy framework interfaces.
 var _ resource.Resource = &ExampleResource{}
-var _ resource.ResourceWithImportState = &ExampleResource{}
 
 func NewExampleResource() resource.Resource {}
 type ExampleResource struct {}
@@ -564,7 +573,6 @@ func (r *ExampleResource) Configure(ctx context.Context, req resource.ConfigureR
 <+>func (r *ExampleResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {}
 <+>func (r *ExampleResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {}
 <+>func (r *ExampleResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {}
-<+>func (r *ExampleResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {}
 
 ```
 ]
