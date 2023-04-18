@@ -145,7 +145,7 @@ Everything with an API can be managed its state by terraform.
 --
 
 .right-column.tiny[
-```hcl
+```tf
 terraform {
   required_providers {
     hashicups = {
@@ -342,6 +342,12 @@ func (p *APIServerProvider) Configure(ctx context.Context, req provider.Configur
 
 ---
 
+template: impact
+name: data-source
+# Data source
+
+---
+
 # Data Source
 
 .tiny[
@@ -392,7 +398,7 @@ func (d *ExampleDataSource) Read(ctx context.Context, req datasource.ReadRequest
 ```
 ]
 .right-column.tiny[
-```py
+```tf
 # examples/data-sources/scaffolding_example/data-source.tf
 
 data "scaffolding_example" "example" {
@@ -466,11 +472,72 @@ func (d *PersonDataSource) Read(ctx context.Context, req datasource.ReadRequest,
 ```
 ]
 
+---
+
+# Data Source
+
+.tiny[
+.left-column[
+```tf
+terraform {
+  required_providers {
+    apiserver = {
+      source = "tcarreira/apiserver"
+      version = "0.0.1"
+    }
+  }
+}
+
+provider "apiserver" {
+  endpoint = "http://localhost:8888"
+}
+
+data "apiserver_person" "example" {
+  id = 0
+}
+
+output "example" {
+  value = data.apiserver_person.example
+}
+```
+]
+.right-column[
+```sh
+❯ terraform apply --auto-approve
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+Outputs:
+example = {
+  "age" = 34
+  "description" = ""
+  "id" = "0"
+  "name" = "Tiago"
+}
+```
+
+
+```json
+{                  `/* terraform.tfstate */`
+  "outputs": { "example": { "value": { "age": 34, "description": "", "id": "0", "name": "Tiago"},...},
+  "resources": [
+    {
+      "mode": "data",
+      "type": "apiserver_person",
+      "name": "example",
+      "provider": "provider[\"registry.terraform.io/tcarreira/apiserver\"]",
+      "instances": [ { "schema_version": 0, 
+        "attributes": { "age": 34, "description": "", "id": "0", "name": "Tiago" },
+      }]
+    }
+  ]
+}
+
+```
+]
+]
 
 ---
 
 # Resource CRUD
-
 
 ---
 
