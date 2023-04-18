@@ -713,7 +713,7 @@ func (r *PersonResource) Update(ctx context.Context, req resource.ReadRequest, r
 ```go
 func (r *PersonResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
 	var data *PersonResourceModel
-	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+<+>	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
@@ -723,11 +723,12 @@ func (r *PersonResource) Delete(ctx context.Context, req resource.DeleteRequest,
 		resp.Diagnostics.AddError("Error converting id to int", err.Error())
 		return
 	}
-	err = r.client.People().Delete(id)
+<+>	err = r.client.People().Delete(id)
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting person", err.Error())
 		return
 	}
+<+>	// no error in the end, resource gets deleted from state
 }
 ```
 ]
@@ -740,7 +741,26 @@ func (r *PersonResource) Delete(ctx context.Context, req resource.DeleteRequest,
 
 ---
 
+template: impact
+name: resource-import
+
 # Resource import
+
+---
+
+# Resource import
+
+```go
+func (r *PersonResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+}
+```
+
+- `terraform import <ID>`
+- saves the ID to state
+- call resource `Read()`
+- save full state
+
 
 
 ---
