@@ -618,7 +618,7 @@ func (r *PersonResource) Create(ctx context.Context, req resource.CreateRequest,
 
 ???
 
-- read tf data from `req`
+- read tf data **Plan** from `req`
 - call API
 - set resource ID
 - save State
@@ -657,10 +657,86 @@ func (r *PersonResource) Read(ctx context.Context, req resource.ReadRequest, res
 
 ???
 
-- read tf data from `req`
+- read tf data **State** from `req`
 - call API
 - set resource ID
-- save State
+
+---
+
+## update
+
+.tiny[
+```go
+func (r *PersonResource) Update(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data *PersonResourceModel
+<+>	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	id, _ := strconv.Atoi(data.Id.ValueString())
+	person := &apiTypes.Person{
+		Name:        data.Name.ValueString(),
+		Age:         int(data.Age.ValueInt64()),
+		Description: data.Description.ValueString(),
+	}
+<+>	err = r.client.People().Update(id, person)
+	if err != nil {
+		resp.Diagnostics.AddError("Error updating person", err.Error())
+		return
+	}
+
+<+>	data.Name = types.StringValue(person.Name)
+<+>	data.Age = types.Int64Value(int64(person.Age))
+<+>	data.Description = types.StringValue(person.Description)
+<+>	if data.LastUpdated.ValueString() == "" {
+<+>		data.LastUpdated = types.StringValue(time.Now().Format(time.RFC3339))
+<+>	}
+
+<+>	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+}
+```
+]
+
+???
+
+- read tf data **Plan** from `req`
+- call API
+- save state
+
+
+---
+
+## delete
+
+.tiny[
+```go
+func (r *PersonResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data *PersonResourceModel
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	id, err := strconv.Atoi(data.Id.ValueString())
+	if err != nil {
+		resp.Diagnostics.AddError("Error converting id to int", err.Error())
+		return
+	}
+	err = r.client.People().Delete(id)
+	if err != nil {
+		resp.Diagnostics.AddError("Error deleting person", err.Error())
+		return
+	}
+}
+```
+]
+
+???
+
+- read tf data **State** from `req`
+- call API
+- return no error (if error, does not clean state)
 
 ---
 
