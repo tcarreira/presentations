@@ -764,9 +764,103 @@ func (r *PersonResource) ImportState(ctx context.Context, req resource.ImportSta
 
 
 ---
+template: impact
+name: testes
 
 # Testes
 
+---
+
+# Testes
+
+- Testes de integração:  `make testacc`
+  - Normalmente, gasta recursos ($$$)
+  - Alternativa: subir um FakeServer
+
+---
+
+# Testes
+
+.tiny[
+
+```go
+func TestAccPersonDataSource(t *testing.T) {
+	resource.Test(t, resource.TestCase{
+		PreCheck: func() {
+			c, _ := client.NewAPIClient(client.Config{Endpoint: "http://localhost:18080"})
+			c.People().Create(&apiTypes.Person{Name: "personXXX", Age: 49})
+		},
+		CheckDestroy: func(s *terraform.State) error {
+			c, _ := client.NewAPIClient(client.Config{Endpoint: "http://localhost:18080"})
+			c.People().Delete(0)
+			return nil
+		},
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: providerConfig + testAccPersonDataSourceConfig,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("data.apiserver_person.test", "name", "personXXX"),
+					resource.TestCheckResourceAttr("data.apiserver_person.test", "age", "49"),
+				),
+			},
+		},
+	})
+}
+
+```
+]
+
+---
+
+# Testes
+
+.tiny.left-column[
+
+```go
+func TestAccPersonDataSource(t *testing.T) {
+	resource.Test(t, resource.TestCase{
+		PreCheck: func() {
+			c, _ := client.NewAPIClient(client.Config{Endpoint: "http://localhost:18080"})
+			c.People().Create(&apiTypes.Person{Name: "personXXX", Age: 49})
+		},
+		CheckDestroy: func(s *terraform.State) error {
+			c, _ := client.NewAPIClient(client.Config{Endpoint: "http://localhost:18080"})
+			c.People().Delete(0)
+			return nil
+		},
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+<+>				Config: providerConfig + testAccPersonDataSourceConfig,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("data.apiserver_person.test", "name", "personXXX"),
+					resource.TestCheckResourceAttr("data.apiserver_person.test", "age", "49"),
+				),
+			},
+		},
+	})
+}
+
+```
+]
+.tiny.right-column[
+
+```go
+const providerConfig = `
+provider "apiserver" {
+	endpoint = "http://localhost:18080"
+}
+`
+
+const testAccPersonDataSourceConfig = `
+data "apiserver_person" "test" {
+  id = 0
+}
+`
+
+```
+]
 
 ---
 
