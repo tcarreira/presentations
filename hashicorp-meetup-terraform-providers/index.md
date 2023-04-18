@@ -89,7 +89,7 @@ name: agenda
 <div class="tiny" style="margin-left: 100px;">
 .left-column[
 - [Terraform Plugin Framework](#terraform-plugin-framework)
-- [Cliente Provider](#provider-client)
+- [Client Provider](#client-provider)
 - [Data Source](#data-source)
 ]
 .right-column[
@@ -107,7 +107,7 @@ name: agenda
 
 layout: false
 template: impact
-name: docker-best-practices
+name: what-is-terraform
 
 <img src="img/terraform-logo.svg" width="400">
 
@@ -173,6 +173,8 @@ terraform {
 
 ---
 
+name: what-is-terraform-provider
+
 # Terraform Providers (Plugins)
 
 O Terraform depende de plugins chamados *providers* para interagir com provedores de cloud, SaaS e outras APIs.
@@ -188,6 +190,7 @@ Os providers definem recources.
 ---
 
 template: impact
+name: creating-a-provider
 
 # Criando um Provider
 
@@ -231,6 +234,8 @@ https://github.com/tcarreira/api-server
 
 
 ---
+
+name: terraform-plugin-framework
 
 # Terraform Plugin Framework
 
@@ -301,6 +306,12 @@ func (p *APIServerProvider) DataSources(ctx context.Context) []func() datasource
 func New(version string) func() provider.Provider {}
 ```
 ]
+
+---
+template: impact
+name: client-provider
+
+# Client Provider
 
 ---
 
@@ -765,7 +776,7 @@ func (r *PersonResource) ImportState(ctx context.Context, req resource.ImportSta
 
 ---
 template: impact
-name: testes
+name: testing
 
 # Testes
 
@@ -929,44 +940,39 @@ name: publishing
 ---
 
 # Publicação
+
 .left-column[
 Pela documentação:
 - goreleaser + github-actions
 - criar uma nova chave GPG
 - adicionar chave privada no GH (GPG_PRIVATE_KEY + PASSPHRSE)
 - adicionar chave pública no Terraform
-- criar uma tag git + `git push origin <tag>`
+- criar uma tag git + <br> `git push origin <tag>`
 - Publicar
 ]
 .right-column[
 <img src="img/publish.png" width="100%">
 ]
-
 ---
 
+# Publicação
 
+[registry.terraform.io/providers/tcarreira/apiserver](https://registry.terraform.io/providers/tcarreira/apiserver/latest)
 
-
-
-
-
----
-
-template: impact
-
-.content[
-
-# What next
-
-]
+<img src="img/registry-terraform.png" width="100%">
 
 ---
-
 
 # References
 
 [1] Call APIs with Custom Framework Providers<br>
 https://developer.hashicorp.com/terraform/tutorials/providers-plugin-framework
+
+[2] Terraform Provider Scaffolding (Terraform Plugin Framework) <br>
+https://github.com/hashicorp/terraform-provider-scaffolding-framework
+
+[3] CRUD API Server <br>
+https://github.com/tcarreira/api-server
 
 ---
 
@@ -981,16 +987,9 @@ https://github.com/tcarreira/presentations/tree/main/hashicorp-meetup-terraform-
 <img src="img/qr.png" style="position: absolute;" width="350">
 
 
-.align-right.tiny[
-<br><br><br><br><br><br><br><br><br><br>
-**note:**<br>
-deprecated tutorial:<br >
-https://developer.hashicorp.com/terraform/tutorials/providers
-]
-
 ---
 
-# Questions/Suggestions?
+# Perguntas?
 
 &nbsp;
 .tiny[
