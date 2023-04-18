@@ -537,7 +537,37 @@ example = {
 
 ---
 
+template: impact
+name:resource-crud
+
 # Resource CRUD
+
+---
+
+# Resource CRUD
+
+.tiny[
+```go
+// Ensure provider defined types fully satisfy framework interfaces.
+var _ resource.Resource = &ExampleResource{}
+var _ resource.ResourceWithImportState = &ExampleResource{}
+
+func NewExampleResource() resource.Resource {}
+type ExampleResource struct {}
+type ExampleResourceModel struct {}
+
+func (r *ExampleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {}
+func (r *ExampleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {}
+func (r *ExampleResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {}
+
+<+>func (r *ExampleResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {}
+<+>func (r *ExampleResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {}
+<+>func (r *ExampleResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {}
+<+>func (r *ExampleResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {}
+<+>func (r *ExampleResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {}
+
+```
+]
 
 ---
 
