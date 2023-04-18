@@ -45,6 +45,10 @@ name: main-title
 
 
 - DevOps Engineer @ tsuru.io (Globo)
+.small[
+- https://  github.com/tsuru
+- https://  registry.terraform.io/providers/tsuru
+]
 - 🇵🇹 &rarr; Rio de Janeiro
 .small[
 - Engenharia Eletrotécnica e de Computadores
@@ -87,9 +91,9 @@ name: agenda
 - [Terraform Plugin Framework](#terraform-plugin-framework)
 - [Cliente Provider](#provider-client)
 - [Data Source](#data-source)
-- [Resource CRUD](#resource-crud)
 ]
 .right-column[
+- [Resource CRUD](#resource-crud)
 - [Resource import](#resource-import)
 - [Testes](#testing)
 - [Documentação](#documentation)
@@ -172,6 +176,7 @@ terraform {
 # Terraform Providers (Plugins)
 
 O Terraform depende de plugins chamados *providers* para interagir com provedores de cloud, SaaS e outras APIs.
+Os providers definem recources.
 
 .center[
 <img src="img/tf-plugins-arch.png" width="100%">
@@ -179,6 +184,98 @@ O Terraform depende de plugins chamados *providers* para interagir com provedore
 .tiny.align-right[
 \* image: https://developer.hashicorp.com/terraform/tutorials/providers/provider-use
 ]
+
+---
+
+template: impact
+
+# Criando um Provider
+
+---
+
+# Criando um Provider
+
+- Extender o Terraform: criando novos resources
+- CRUD
+  - Create
+  - Read
+  - Update (opcional)
+  - Delete
+
+---
+
+# Criando um Provider
+
+Tutorial:
+<span class="tiny">
+https://developer.hashicorp.com/terraform/tutorials/providers-plugin-framework
+<span>
+
+<img src="img/tutorial-screenshot.png" height="470px" style="position:absolute;" >
+
+???
+
+Deprecated: Terraform Plugin SDK
+
+Newest: Terraform Plugin Framework
+
+---
+
+# Criando um Provider
+
+Template:
+https://github.com/hashicorp/terraform-provider-scaffolding-framework
+
+
+
+---
+
+# Terraform Plugin Framework
+
+
+
+
+---
+
+# Client Provider
+
+
+---
+
+# Data Source
+
+
+---
+
+# Resource CRUD
+
+
+---
+
+# Resource import
+
+
+---
+
+# Testes
+
+
+---
+
+# Documentação
+
+
+---
+
+# Publicar
+
+
+---
+
+
+
+
+
 
 
 ---
