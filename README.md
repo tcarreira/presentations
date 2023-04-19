@@ -1,6 +1,6 @@
 # Presentations
 
-- [Terraform Providers - Hashicorp Meetup RJ (pt)](https://tcarreira.github.io/presentations/hashicorp-meetup-terraform-providers)
+- [Terraform Providers - Hashicorp Meetup RJ (pt)](https://tcarreira.github.io/presentations/hashicorp-meetup-terraform-providers) [(youtube)](https://youtube.com/live/OiD38iFmAjE)
 - [Docker Workshop](https://tcarreira.github.io/presentations/docker-workshop/)
 - [Docker - Ubucon Europe 2019](https://tcarreira.github.io/presentations/ubucon-europe-2019/docker.html)
 - [Docker - Tips and Best Practices - Ubucon Europe 2019](https://tcarreira.github.io/presentations/ubucon-europe-2019/docker2.html)
