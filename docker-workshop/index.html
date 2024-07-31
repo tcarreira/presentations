@@ -123,6 +123,7 @@ template: impact
 
 - Let's check the basics about Docker
 - Increasingly being used
+- Open source project since 2013
 
 ---
 
@@ -456,17 +457,14 @@ name: install-docker
 
 # Install Docker
 
-- Do NOT install from apt-get: very outdated (almost useless)
 - Windows - Docker Desktop
   - https://docs.docker.com/docker-for-windows/install/
-- Mac - Docker Desktop
+- Mac - Docker Desktop*
   - https://docs.docker.com/docker-for-mac/install/
 - Linux
+  - apt-get install docker-ce (can be outdated)
   - Brain dead easy way: `wget -qO- https://get.docker.com | sh`
   - Other way: https://docs.docker.com/install/
-    <br><br><br>
-    Recommended for Linux: Manage Docker as a non-root user <br>(https://docs.docker.com/install/linux/linux-postinstall/)
-    <br><br>There is also a rootless docker (experimental): https://get.docker.com/rootless
 
 ???
 
@@ -476,13 +474,18 @@ name: install-docker
   - just use the script or
   - do it manually by following the docs (still not hard)
 
+--
+
+*Since 2022, Docker for Desktop is licenced (paid) for big Companies.<br>
+You can try other alternatives. (Personal suggestion: [colima](https://github.com/abiosoft/colima))
+
 ---
 
 # Sanity check Docker
 
 ```no-highlight
 $ docker --version
-Docker version 19.03.2, build 6a30dfc
+Docker version 25.0.2, build 29cf629222
 ```
 
 ```no-highlight
@@ -773,7 +776,7 @@ template: impact
 
 .content[
 
-# docker-compose
+# <strike>docker-compose</strike><br>docker compose
 
 ]
 
@@ -782,6 +785,10 @@ template: impact
 enter docker-compose
 
 - Tool for managing multi-container apps
+- included as a docker-cli plugin now
+  - https://docs.docker.com/compose/intro/history/
+  - compose v2 since 2020:
+    > Version two of the Docker Compose command-line binary was announced in 2020, is written in Go, and is invoked with docker compose. Compose V2 ignores the version top-level element in the compose.yml file.
 
 ---
 
@@ -811,14 +818,14 @@ enter docker-compose
 
 .right-column.small[
 
-```conf
-version: '3.3'
+```yaml
+<-->version: '3.3'
 services:
     db:
-        image: 'mysql:5.7'
+        image: 'mysql:8.0'
         <...>
     wordpress:
-        image: wordpress:latest
+        image: "wordpress:latest"
         ports:
             - '8000:80'
         environment:
@@ -831,6 +838,13 @@ volumes:
 ```
 
 ]
+
+???
+
+- no need for version anymore
+> Version two of the Docker Compose command-line binary was announced in 2020, is written in Go, and is invoked with docker compose. Compose V2 ignores the version top-level element in the compose.yml file.
+
+
 
 ---
 
@@ -2195,7 +2209,7 @@ template: impact
 <br><br><br><br><br>
 <img src="img/presentation-url-qr.png" height="150px">
 <br>
-.tiny[https://tcarreira.github.io/presentations/docker-workshop/]
+.tiny[[https://tcarreira.github.io/presentations/docker-workshop](https://tcarreira.github.io/presentations/docker-workshop/)]
 ]
 
 .right-column[
