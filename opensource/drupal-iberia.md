@@ -261,6 +261,26 @@ Open source dependes on us, individuals
 - Don’t focus only on technical aspects — embrace the cultural and social impact
 - Don’t fall into fundamentalism — be open to different approaches and solutions
 
+---
+
+template: inverse
+<br>
+<br>
+<br>
+<br>
+<br>
+## "Do not wait for leaders; do it alone\*, person to person."
+Mother Teresa
+
+<br>
+<br>
+<br>
+<br>
+
+.left.tiny[
+\* Alone means to start acting without waiting for others, not doing it apart from others.
+
+]
 
 ---
 
@@ -270,6 +290,14 @@ Open source dependes on us, individuals
 This slides are open source:
 https://tcarreira.github.io/presentations/opensource/
 
+https://ansol.org
+https://festa2025.softwarelivre.eu
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 ]
 
 
