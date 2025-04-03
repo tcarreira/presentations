@@ -221,4 +221,62 @@ template: inverse
 - **Customization**: Open Source provides the flexibility to tailor Drupal to your needs, whether through custom modules or contributed solutions
 - **Sustainability**: Drupal’s Open Source model ensures that it can evolve based on community needs, ensuring its long-term sustainability and continued improvement
 
+---
 
+template: inverse
+class: title
+
+# Don’t Wait for Change!
+## Be the Catalyst for Open Source Progress
+
+???
+
+Open source dependes on us, individuals
+
+---
+
+# Open Source Depends on You
+
+**What to Do:**
+- Welcome newcomers with patience and guidance
+- Share the values of Open Source: collaboration, transparency, and freedom
+- Encourage people to contribute, no matter their skill level
+- Promote a culture of kindness and inclusivity in the community
+- Lead by example and respect
+
+--
+
+**What Not to Do:**
+- Don’t exclude anyone — Open Source is for all, regardless of background
+- Don’t focus only on technical aspects — embrace the cultural and social impact
+- Don’t fall into fundamentalism — be open to different approaches and solutions
+
+
+---
+
+# Thank you
+
+.left-column[
+This slides are open source:
+https://tcarreira.github.io/presentations/opensource/
+
+]
+
+
+.rigth-column[
+.center[
+.pic-circle[
+<img src="img/tcarreira.jpg" width="150">
+]
+<img src="img/ansol.png" height="20">
+]
+.center.no-bullets.tiny[
+
+- **web:** https://tiago.carreira.pw
+- **telegram:** https://t.me/tcarreira
+- **github:** https://github.com/tcarreira
+- **mastodon:** https://floss.social/tcarreira
+- **linkedIn:** https://linkedin.com/in/tcarreira
+]
+
+]
