@@ -176,13 +176,13 @@ code {
 }
 
 .inverse {
-  background: #5E2750;
-  color: #eee;
+  background: #243571;
+  color: #caebf3;
   text-shadow: 0 0 20px #2C001E;
 }
 
 .inverse h1, .inverse h2 {
-  color: #eee;
+  color: #caebf3;
   line-height: 1.1em;
   /* background-color: #2C001E; */
 }
