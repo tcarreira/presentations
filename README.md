@@ -7,6 +7,7 @@
 - [Django on Docker](https://tcarreira.github.io/presentations/django-docker/) ([PT](https://tcarreira.github.io/presentations/django-docker/pt.html))
 - [Como manter um podcast a custo zero com software livre](https://tcarreira.github.io/presentations/marmita-de-redon/software-livre.html)
 - [Build and host your podcast for free](https://tcarreira.github.io/presentations/marmita-de-redon/devops-lisbon.html)
+- [Open Source](https://tcarreira.github.io/presentations/opensource)
 
 ----
 
