@@ -26,17 +26,9 @@ template: title
 name: main-title
 
 
-.content[
-
 # Let Open Source set us Free
 
 ## A Call to Action for a Better Digital World
-
-
-.no-bullets[
-- Tiago Carreira
-]
-]
 
 ---
 
