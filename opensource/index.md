@@ -89,3 +89,136 @@ name: main-title
 ]
 
 ---
+
+# The Power of Open Source
+
+- **Freedom**: Control your software, data, and digital future
+- **Data Sovereignty**: Own and control your data, not big tech
+- **Transparency**: Open code means trust and security
+- **Innovation**: Faster progress through shared knowledge
+- **Impact**: From personal projects to enterprise solutions
+- **Collaboration**: Global communities building together
+- **Ethical AI**: Open models promote transparency and help prevent biased, proprietary systems
+
+---
+
+# Successful Projects  
+
+.left-column[
+- Linux
+- Drupal
+- Kubernetes
+- Nextcloud
+- Mozilla Firefox
+- LibreOffice
+- Git
+- Apache HTTP Server
+- MySQL
+- GitLab
+- Docker
+]
+.right-column[
+- VLC Media Player
+- Blender
+- GIMP
+- Redis
+- OpenStreetMap
+- Mastodon
+- Jitsi
+- Prometheus
+- Home Assistant
+- Remark-js
+- ...
+]
+
+???
+
+- Many more.
+- a round of applause to Drupal
+
+---
+
+# But Open Source is Getting Broken
+
+- **Corporate Control**: Corporations steering projects for profit
+- **Sustainability Challenges**: Funding and resource scarcity
+- **Fragmentation**: Lack of unified direction in some projects
+- **Lack of Governance**: Inconsistent decision-making processes
+- **Contributor Burnout**: Volunteers overwhelmed and under-supported
+- **Abandonment**: Key projects being neglected or discontinued
+
+---
+
+template: inverse
+
+# Why Open Source still matters?
+
+???
+
+- If people are burned by FLOSS, why does it matter to save it?
+- Why is it important?
+
+---
+
+# Why Open Source still matters?
+
+- **Empowering People**: Open Source empowers individuals, not just technology
+- **Community and Collaboration**: It creates a sense of belonging, connecting people
+- **Self-Determination**: It lets communities shape their own digital future, free from control
+- **Personal Growth**: Contributing helps build meaningful skills and fosters learning
+- **Giving Back**: It’s a chance to contribute to something larger than yourself
+- **Fostering Innovation through People**: Technology can’t replace human empathy
+- **Collective Responsibility**: Open Source ensures everyone has a voice in shaping the future
+
+---
+
+.left-column[
+
+# What's in for ME?
+
+- **Skill Development**
+- **Networking**
+- **Reputation**
+- **Career Opportunities**
+- **Personal Satisfaction**
+- **Learning from Experts**
+- **Recognition**
+- **Mentorship**
+]
+
+???
+
+- **Skill Development**: Gain hands-on experience with real-world projects and cutting-edge tech
+- **Networking**: Build connections with like-minded professionals and communities worldwide
+- **Reputation**: Contribute to projects that showcase your expertise and enhance your portfolio
+- **Career Opportunities**: Open Source involvement can lead to job offers, collaborations, and career growth
+- **Personal Satisfaction**: Take pride in knowing your work has a positive impact on the world
+- **Learning from Experts**: Collaborate with top developers and learn from their experience
+- **Recognition**: Get credit for your contributions in a globally recognized space
+- **Mentorship**: Both giving and receiving mentorship in a supportive environment
+
+--
+
+.right-column[
+# What's in for US?
+
+- **Shared Knowledge**
+- **Lower Costs**
+- **Faster Innovation**
+- **Better Security**
+- **Inclusive Community**
+- **Customization**
+- **Sustainability**
+]
+
+???
+
+- **Shared Knowledge**: The Drupal community thrives on collective learning, with contributors improving core features and creating modules that benefit everyone
+- **Lower Costs**: Organizations can avoid expensive proprietary licenses, focusing resources on custom development or other areas of growth
+- **Faster Innovation**: With global collaboration, new features, improvements, and security patches arrive quickly, keeping Drupal ahead of the curve
+- **Better Security**: Open Source projects like Drupal are scrutinized by many experts, leading to more robust and secure systems
+- **Inclusive Community**: Drupal’s community is diverse, welcoming people from all backgrounds to contribute, ensuring more inclusive, accessible solutions
+- **Customization**: Open Source provides the flexibility to tailor Drupal to your needs, whether through custom modules or contributed solutions
+- **Sustainability**: Drupal’s Open Source model ensures that it can evolve based on community needs, ensuring its long-term sustainability and continued improvement
+
+
