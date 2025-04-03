@@ -90,18 +90,6 @@ name: main-title
 
 ---
 
-# The Power of Open Source
-
-- **Freedom**: Control your software, data, and digital future
-- **Data Sovereignty**: Own and control your data, not big tech
-- **Transparency**: Open code means trust and security
-- **Innovation**: Faster progress through shared knowledge
-- **Impact**: From personal projects to enterprise solutions
-- **Collaboration**: Global communities building together
-- **Ethical AI**: Open models promote transparency and help prevent biased, proprietary systems
-
----
-
 # Successful Projects  
 
 .left-column[
@@ -135,6 +123,28 @@ name: main-title
 
 - Many more.
 - a round of applause to Drupal
+
+---
+
+# The Power of Open Source
+
+- **Freedom**: Control your software, data, and digital future
+- **Data Sovereignty**: Own and control your data, not big tech
+- **Transparency**: Open code means trust and security
+- **Ethical AI**: Open models promote transparency and help prevent biased, proprietary systems
+- **Innovation**: Faster progress through shared knowledge
+- **Impact**: From personal projects to enterprise solutions
+- **Collaboration**: Global communities building together
+
+???
+
+### The four essential freedoms
+A program is free software if the program's users have the four essential freedoms: [1]
+
+- The freedom to run the program as you wish, for any purpose (freedom 0).
+- The freedom to study how the program works, and change it so it does your computing as you wish (freedom 1). Access to the source code is a precondition for this.
+- The freedom to redistribute copies so you can help others (freedom 2).
+- The freedom to distribute copies of your modified versions to others (freedom 3). By doing this you can give the whole community a chance to benefit from your changes. Access to the source code is a precondition for this.
 
 ---
 
