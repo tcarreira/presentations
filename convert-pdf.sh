@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -x
 if [ $# -lt 1 ]; then
   echo "Usage: $0 <sourcefile.html> [<destfilename.pdf>]"
   exit 1
@@ -26,7 +26,7 @@ if [ -f "$pdffile" ]; then
   esac
 fi
 
-DOCKER_MAGE="tcarreira/decktape"
+DOCKER_IMAGE="tcarreira/decktape"
 [ "$(uname -m)" = "arm64" ] && DOCKER_IMAGE="${DOCKER_MAGE}:m1"
 
 docker run --rm -t -u "$(id -u):$(id -g)" -v "$(pwd):/host" "${DOCKER_IMAGE}" "/host/$htmlfile" "/host/$pdffile"
