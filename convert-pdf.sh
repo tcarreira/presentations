@@ -1,5 +1,4 @@
 #!/bin/sh
-set -x
 if [ $# -lt 1 ]; then
   echo "Usage: $0 <sourcefile.html> [<destfilename.pdf>]"
   exit 1
@@ -26,8 +25,9 @@ if [ -f "$pdffile" ]; then
   esac
 fi
 
-DOCKER_IMAGE="tcarreira/decktape"
+DOCKER_IMAGE="astefanutti/decktape:2.11.0"
 [ "$(uname -m)" = "arm64" ] && DOCKER_IMAGE="${DOCKER_MAGE}:m1"
 
-docker run --rm -t -u "$(id -u):$(id -g)" -v "$(pwd):/host" "${DOCKER_IMAGE}" "/host/$htmlfile" "/host/$pdffile"
+# docker run --rm -it -u "$(id -u):$(id -g)" -v "$(pwd):/host" --entrypoint sh "${DOCKER_IMAGE}" ###"--chrome-arg=--allow-file-access-from-files" "/host/$htmlfile" "/host/$pdffile"
+docker run --rm -it -u "$(id -u):$(id -g)" -v "$(pwd):/host" "${DOCKER_IMAGE}" "--chrome-arg=--allow-file-access-from-files" "/host/$htmlfile" "/host/$pdffile"
 
