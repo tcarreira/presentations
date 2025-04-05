@@ -169,8 +169,8 @@ template: inverse
 - **Community and Collaboration**: It creates a sense of belonging, connecting people
 - **Self-Determination**: It lets communities shape their own digital future, free from control
 - **Personal Growth**: Contributing helps build meaningful skills and fosters learning
-- **Giving Back**: It’s a chance to contribute to something larger than yourself
-- **Fostering Innovation through People**: Technology can’t replace human empathy
+- **Giving Back**: It's a chance to contribute to something larger than yourself
+- **Fostering Innovation through People**: Technology can't replace human empathy
 - **Collective Responsibility**: Open Source ensures everyone has a voice in shaping the future
 
 ---
@@ -220,16 +220,16 @@ template: inverse
 - **Lower Costs**: Organizations can avoid expensive proprietary licenses, focusing resources on custom development or other areas of growth
 - **Faster Innovation**: With global collaboration, new features, improvements, and security patches arrive quickly, keeping Drupal ahead of the curve
 - **Better Security**: Open Source projects like Drupal are scrutinized by many experts, leading to more robust and secure systems
-- **Inclusive Community**: Drupal’s community is diverse, welcoming people from all backgrounds to contribute, ensuring more inclusive, accessible solutions
+- **Inclusive Community**: Drupal's community is diverse, welcoming people from all backgrounds to contribute, ensuring more inclusive, accessible solutions
 - **Customization**: Open Source provides the flexibility to tailor Drupal to your needs, whether through custom modules or contributed solutions
-- **Sustainability**: Drupal’s Open Source model ensures that it can evolve based on community needs, ensuring its long-term sustainability and continued improvement
+- **Sustainability**: Drupal's Open Source model ensures that it can evolve based on community needs, ensuring its long-term sustainability and continued improvement
 
 ---
 
 template: inverse
 class: title
 
-# Don’t Wait for Change!
+# Don't Wait for Change!
 ## Be the Catalyst for Open Source Progress
 
 ???
@@ -250,9 +250,9 @@ Open source dependes on us, individuals
 --
 
 **What Not to Do:**
-- Don’t exclude anyone — Open Source is for all, regardless of background
-- Don’t focus only on technical aspects — embrace the cultural and social impact
-- Don’t fall into fundamentalism — be open to different approaches and solutions
+- Don't exclude anyone — Open Source is for all, regardless of background
+- Don't focus only on technical aspects — embrace the cultural and social impact
+- Don't fall into fundamentalism — be open to different approaches and solutions
 
 ---
 
@@ -283,7 +283,7 @@ Mother Teresa
 This slides are open source:
 https://tcarreira.github.io/presentations/opensource/
 
-https://ansol.org
+https://ansol.org/inscricao
 https://festa2025.softwarelivre.eu
 <br>
 <br>

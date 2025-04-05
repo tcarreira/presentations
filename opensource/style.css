@@ -5,8 +5,8 @@ html {
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: "League Gothic", "apple-system", "Segoe UI", "Roboto", "Oxygen", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  letter-spacing: 4px;
-  word-spacing: 5px;
+  letter-spacing: 0.08em;
+  word-spacing: 0.05em;
 }
 pre{
   font-family: "Consolas", "Monaco", Courier, monospace;
