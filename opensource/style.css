@@ -1,13 +1,34 @@
+@import url("fonts.css");
+
+html {
+  font-family: "Sofia Sans", "apple-system", "Segoe UI", "Roboto", "Oxygen", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "League Gothic", "apple-system", "Segoe UI", "Roboto", "Oxygen", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  letter-spacing: 4px;
+  word-spacing: 5px;
+}
+pre{
+  font-family: "Consolas", "Monaco", Courier, monospace;
+  font-size: 1em;
+}
+
+
+
 body {
   line-height: 1.5;
 }
 
 h1 {
   font-weight: bold;
+  margin-block-start: 15px;
+  margin-block-end: 15px;
 }
 
 h2, h3 {
   font-weight: normal;
+  margin-block-start: 10px;
+  margin-block-end: 10px;
 }
 
 .remark-slide-content {
@@ -17,7 +38,7 @@ h2, h3 {
 }
 
 .remark-slide-content h1 {
-  font-size: 45px;
+  font-size: 60px;
   color: #243571;
 }
 
