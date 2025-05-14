@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Let Open Source set us Free</title>
+  <meta charset="utf-8" />
+  <style>
+    @import url(style.css);
+  </style>
+</head>
+
+<body>
+  <textarea id="source">
+  </textarea>
+
+  <script src="remark-latest.min.js"></script>
+  <script>
+    var slideshow = remark.create({
+      slideNumberFormat: "%current%",
+      ratio: "16:9",
+      highlightStyle: "vs",
+      highlightLines: true,
+      highlightSpans: true,
+      navigation: {
+        scroll: false,
+        touch: true,
+        click: false,
+      },
+      sourceUrl: "./free-software.md",
+    });
+  </script>
+  <script src="jquery.min.js"></script>
+  <script>
+    var existCondition = setInterval(function () {
+      console.log("waiting for markdown load...")
+      if ($('.remark-slides-area').length) {
+        console.log("Start some replacements");
+        clearInterval(existCondition);
+
+        Array.from($(".remark-code-line")).forEach((el) => {
+          if (el.innerHTML.includes("&lt;--&gt;")) {
+            el.innerHTML = el.innerHTML.replace("&lt;--&gt;", '').replace("&lt;/--&gt;", "");
+            el.classList.add("remark-code-line-highlighted-removed");
+          }
+          if (el.innerHTML.includes("&lt;red&gt;")) {
+            el.innerHTML = el.innerHTML.replace("&lt;red&gt;", '').replace("&lt;/red&gt;", "");
+            el.classList.add("remark-code-line-highlighted-red");
+          }
+          if (el.innerHTML.includes("&lt;-&gt;")) {
+            el.innerHTML = el.innerHTML.replace("&lt;-&gt;", '').replace("&lt;/-&gt;", "");
+            el.classList.add("remark-code-line-highlighted-removed");
+          }
+          if (el.innerHTML.includes("&lt;+&gt;")) {
+            el.innerHTML = el.innerHTML.replace("&lt;+&gt;", '').replace("&lt;/+&gt;", "");
+            el.classList.add("remark-code-line-highlighted-added");
+          }
+          if (el.innerHTML.includes("&lt;=&gt;")) {
+            el.innerHTML = el.innerHTML.replace("&lt;=&gt;", '').replace("&lt;/=&gt;", "");
+            el.classList.add("remark-code-line-highlighted");
+          }
+        });
+        console.log("Finished some replacements");
+      }
+    }, 100); // check every 100ms
+
+    // Css hack (remove top margin if column has h2 inside)
+    $(".left-column:has(h2)").addClass("remove-top-space");
+    $(".right-column:has(h2)").addClass("remove-top-space");
+  </script>
+</body>
+
+</html>
